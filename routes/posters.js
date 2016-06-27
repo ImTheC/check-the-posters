@@ -6,6 +6,16 @@ var Posters = function () {
 	return knex('posters');
 };
 
+var loggedIn = function(req, res, next) {
+	var user_id = req.signedCookies.userID;
+
+	if ( user_id ) {
+		next();
+	} else {
+		res.status(401).redirect('/');
+	}
+};
+
 var authorized = function(req, res, next) {
 	var user_id = req.signedCookies.userID;
 
@@ -16,17 +26,42 @@ var authorized = function(req, res, next) {
 	}
 };
 
-/* GET All POSTERS. */
-router.get('/', function (req, res) {
-	Posters().then(function(posters){
-		res.render('posters/index', {title: "Poster Pole Front Page Home", posters:posters });
+
+/* GET All POSTERS.
+					&
+	ADD NEW POSTERS. */
+
+router.route('/')
+
+	.get(function (req, res) {
+		Posters().then(function(posters){
+			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters });
+		})
+
+	.post(function(req, res){
+		res.send("This would have been added " + req.body.comment);
+		// knex("posters").insert(req.body.poster).then(function(){
+		// 	res.redirect("/" + req.params.poster.id);
+		// });
 	});
+
+/* CREATE NEW POSTERS. */
+router.get('/new', loggedIn, function (req, res) {
+	res.render('posters/new', {title: "New Poster"});
 });
 
 /* GET SPECIFIC POSTER */
 router.get('/:poster_id', function (req, res) {
 	Posters().where("id", req.params.poster_id).first().then(function(poster){
 		res.render('posters/show', {title: "Poster Page", poster:poster });
+	});
+});
+
+
+/* EDIT PAGE FOR SPECIFIC POSTER */
+router.get('/:poster_id/edit', function (req, res) {
+	Posters().where("id", req.params.poster_id).first().then(function(poster){
+		res.render('posters/edit', {title: "Poster Page", poster:poster });
 	});
 });
 
