@@ -7,8 +7,8 @@ var Posters = function () {
 };
 
 /* GET posters listing. */
-router.get('/', function (req, res, next) {
-	res.send('respond with set of posters');
+router.get('/', function (req, res) {
+	res.render('index', {title: "Poster Pole Front Page Home"});
 });
 
 module.exports = router;
