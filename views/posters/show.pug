@@ -1,0 +1,20 @@
+include ../partials/header
+include ../partials/nav
+
+	.container
+		.row
+			.col.s12.m6
+				img(src='#{poster.imgurl}')
+				if user === poster.user_id
+					p
+						a(href='#') edit
+				h2 #{poster.name}
+					p
+						| Location: #{poster.location}
+						| On #{poster.date}
+						| From #{poster.start_time} to #{poster.end_time}
+						| #{poster.details}
+						| #{poster.hearts}
+						| #{poster.date}
+
+include ../partials/materializeScript
