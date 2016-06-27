@@ -8,7 +8,15 @@ var Posters = function () {
 
 /* GET posters listing. */
 router.get('/', function (req, res) {
-	res.render('index', {title: "Poster Pole Front Page Home"});
+	Posters().then(function(posters){
+		res.render('posters/index', {title: "Poster Pole Front Page Home", posters:posters });
+	});
+});
+
+router.get('/:poster_id', function (req, res) {
+	Posters().where("id", req.params.poster_id).first().then(function(posters){
+		res.render('posters/show', {title: "Poster Pole Front Page Home", poster:poster });
+	});
 });
 
 module.exports = router;
