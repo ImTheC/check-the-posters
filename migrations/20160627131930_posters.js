@@ -12,7 +12,7 @@ exports.up = function (knex, Promise) {
 		table.string("category");
 		table.string("details");
 		table.integer("hearts");
-		table.integer("user_id").unsigned().index().reference("users.id").onDelete('cascade');
+		table.integer("user_id").unsigned().index().references("users.id").onDelete('cascade');
 	});
 };
 

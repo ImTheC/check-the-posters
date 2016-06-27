@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
 		table.string("email");
 		table.string("password");
 		table.boolean("isadmin");
-		table.sting("oauth");
+		table.string("oauth");
 	});
 };
 
