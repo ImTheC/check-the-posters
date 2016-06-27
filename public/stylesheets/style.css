@@ -39,3 +39,26 @@ Accent:
 .text-accent {
 	color: #ff6e40;
 }
+
+.subnav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.subnav li {
+    float: left;
+}
+
+.subnav li a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.subnav li a:hover {
+    background-color: #37474f;
+}
