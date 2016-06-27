@@ -4,7 +4,8 @@ exports.up = function (knex, Promise) {
 		table.text("imgurl");
 		table.string("name");
 		table.string("address");
-		table.string("city_state");
+		table.string("city");
+		table.string("state");
 		table.string("zip");
 		table.date("date");
 		table.time("start_time");
