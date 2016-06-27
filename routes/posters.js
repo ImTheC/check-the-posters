@@ -7,7 +7,7 @@ var Posters = function () {
 };
 
 var authorized = function(req, res, next) {
-	let user_id = req.signedCookies.userID;
+	var user_id = req.signedCookies.userID;
 
 	if ( user_id === req.params.id ) {
 		next();
