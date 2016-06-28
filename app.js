@@ -7,13 +7,14 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var postersRoute = require('./routes/posters');
 var passport = require('passport');
-var session = require('express-session');
+var session = require('cookie-session');
 
 require('dotenv').load();
 
+var auth = require('./routes/auth');
 var routes = require('./routes/index');
-
 var users = require('./routes/users');
+
 var app = express();
 
 // view engine setup
@@ -33,12 +34,12 @@ app.use(methodOverride("_method"));
 app.use(session({
   secret: process.env.SECRET_KEY,
 	name: 'POSTRAPP',
-  resave: true,
-  saveUninitialized: true
+	maxage: 360000
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/auth', auth);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/posters', postersRoute);
