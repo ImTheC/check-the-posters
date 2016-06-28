@@ -36,7 +36,8 @@ router.route('/')
 	.get(function (req, res) {
 		Posters().then(function(posters){
 			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters });
-		})
+		});
+	})
 
 	.post(function(req, res){
 		res.send("This would have been added " + req.body.comment);
