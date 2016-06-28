@@ -37,7 +37,7 @@ router.route('/')
 		Posters().then(function(posters){
 			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters });
 		})
-
+	})
 	.post(function(req, res){
 		res.send("This would have been added " + req.body.comment);
 		// knex("posters").insert(req.body.poster).then(function(){
@@ -82,5 +82,5 @@ router.route('/:poster_id', authorized)
 		// 	res.redirect('posters/' + req.params.poster_id);
 		// });
 	});
-
+	
 module.exports = router;
