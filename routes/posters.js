@@ -6,24 +6,25 @@ var Posters = function () {
 	return knex('posters');
 };
 
+// ### NEED TO ADD BACK IN ONCE LOGIN IS ADDED ###
 var loggedIn = function(req, res, next) {
 	var user_id = req.signedCookies.userID;
 
-	if ( user_id ) {
+	// if ( user_id ) {
 		next();
-	} else {
-		res.status(401).redirect('/');
-	}
+	// } else {
+	// 	res.status(401).redirect('/');
+	// }
 };
 
 var authorized = function(req, res, next) {
 	var user_id = req.signedCookies.userID;
 
-	if ( user_id === req.params.id ) {
+	// if ( user_id === req.params.id ) {
 		next();
-	} else {
-		res.status(401).redirect('/');
-	}
+	// } else {
+	// 	res.status(401).redirect('/');
+	// }
 };
 
 
@@ -40,10 +41,9 @@ router.route('/')
 	})
 
 	.post(function(req, res){
-		res.send("This would have been added " + req.body.comment);
-		// knex("posters").insert(req.body.poster).then(function(){
-		// 	res.redirect("/" + req.params.poster.id);
-		// });
+		knex("posters").insert(req.body.poster, "id").then(function(id){
+			res.redirect("/posters/" + id);
+		});
 	});
 
 /* CREATE NEW POSTERS. */
