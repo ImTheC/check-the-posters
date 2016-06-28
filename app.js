@@ -5,10 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var routes = require('./routes/index');
-var users = require('./routes/users');
 var postersRoute = require('./routes/posters');
+var passport = require('passport');
+var session = require('express-session');
 
+require('dotenv').load();
+
+var routes = require('./routes/index');
+
+var users = require('./routes/users');
 var app = express();
 
 // view engine setup
@@ -25,7 +30,14 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser(process.env.SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method"));
-
+app.use(session({
+  secret: process.env.SECRET_KEY,
+	name: 'POSTRAPP',
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
