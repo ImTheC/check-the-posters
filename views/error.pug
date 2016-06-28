@@ -1,6 +1,9 @@
-extends layout
+include ./partials/header.pug
+include ./partials/nav.pug
 
 block content
   h1= message
   h2= error.status
   pre #{error.stack}
+
+include ./partials/materializeScript.pug

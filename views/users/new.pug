@@ -1,0 +1,20 @@
+include ../partials/header.pug
+include ../partials/nav.pug
+
+block content
+  div.container
+    h1 #{title}
+    form(action="/users", method="POST")
+      div.input-field
+        input(id="name" type="text" name="user[name]")
+        label(for="name") Name
+      div.input-field
+        input(id="email" type="text" name="user[email]")
+        label(for="email") Email
+      div.input-field
+        input(id="password" type="text" name="user[password]")
+        label(for="password") Password
+      div.row
+        input(class="btn btn-primary" type="submit" value="Submit")
+
+include ../partials/materializeScript.pug
