@@ -44,7 +44,6 @@ router.get('/:id/edit', (req, res) => {
 
 router.put('/:id', (req, res) => {
   Users().where('id', req.params.id).update(req.body.user).then((user) => {
-    eval(locus);
     res.redirect('/users');
   })
 })
