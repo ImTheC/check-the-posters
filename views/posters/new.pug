@@ -1,6 +1,56 @@
 include ../partials/header
 include ../partials/nav
 
-h1 PAGE NEEDS TO BE CREATED
+.section
+.container
+	.row
+		form.col.s12(action="/posters/" method="POST")
+			h2 #{title}
+			.row
+				.input-field.col.s6
+					input#event_name.validate(type='text' name="poster[name]" required)
+					label(for='event_name') Event Name:
+				.input-field.col.s6
+					label(for='date') Date:
+					input#date.validate.datepicker(type='date' name="poster[date]" required)
+			.row
+				.input-field.col.s6.validate
+					label(for='start_time') Starting At:
+				.input-field.col.s6.validate
+					label(for='start_time') Ending At:
+			.row
+				.input-field.col.s6
+					input#start_time.validate.timepicker(type='time' placeholder="18:00" name="poster[start_time]" required)
+				.input-field.col.s6
+					input#end_time.validate.timepicker(type='time' placeholder="19:00" name="poster[end_time]" required)
+			.row
+				.input-field.col.s12
+					input#address.validate(type='text' name="poster[address]" required)
+					label(for='address') Address:
+			.row
+				.input-field.col.s6
+					input#city.validate(type='text' name="poster[city]" required)
+					label(for='city') City:
+				.input-field.col.s3
+					input#state.validate(type='text' name="poster[state]" required)
+					label(for='state') State:
+				.input-field.col.s3
+					input#zip.validate(type='text' name="poster[zip]" required)
+					label(for='zip') Zip:
+			.row
+				.input-field.col.s12
+					input#details.validate(type='text' placeholder="                   You can add extra details here if needed." name="poster[details]")
+					label(for='details') Details:
+			.row
+				.input-field.col.s12
+					input#imgurl.validate(type='url' name="poster[imgurl]" required)
+					label(for='imgurl') Image Url:
+			.row
+				.input-field.col.s12
+					button.btn.waves-effect.waves-light(type='submit')
+						| Add New Poster
+						i.material-icons.right note_add
+
 
 include ../partials/materializeScript
+script(type="text/javascript" src="/javascripts/new_poster_initialize.js")
