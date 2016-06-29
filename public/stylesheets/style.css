@@ -76,10 +76,16 @@ Accent:
 	height: auto;
 }
 
-.grow {
-	transition: all .5s ease-in-out;
-}
+/* Only if screen not small */
+@media screen and (min-width: 600px) {
 
-.grow:hover {
-	transform: scale(1.5);
-	z-index: 100;
+	.grow {
+		transition: all .5s ease-in-out;
+	}
+
+	.grow:hover {
+		transform: scale(1.5);
+		z-index: 100;
+	}
+
+}
