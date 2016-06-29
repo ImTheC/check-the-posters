@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
+var authHelpers = require('../auth/authHelpers');
+var passwordHelpers = require('../auth/passwordHelpers');
+
+router.use(authHelpers.currentUser);
+router.use(authHelpers.checkAuthentication);
 
 var Posters = function () {
 	return knex('posters');

@@ -4,10 +4,11 @@ header
 			a.brand-logo.left(href="/")
 				img(src="#")
 				| Postr
-			if req.user ||
+			if currentUser
 				ul.right
 					li: a(href="/posters/new") New Poster
-					li: a(href="/users/" + req.user.id) Account
+					li: a(href="/users/" + currentUser.id) Account
+					li: a(href="/auth/logout") Logout
 			else
 				ul.right
 					li: a(href="/auth/login") Login
