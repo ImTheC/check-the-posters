@@ -1,0 +1,19 @@
+include ../partials/header.pug
+include ../partials/nav.pug
+
+block content
+  div.container
+    if(message.length)
+      div.alert=message
+    h1 Login
+    form(action="/auth/login", method="POST")
+      div.input-field
+        input(id="username" type="text" name="user[username]")
+        label(for="username") Username
+      div.input-field
+        input(id="password" type="password" name="user[password]")
+        label(for="password") Password
+      div.row
+        input(class="btn btn-primary" type="submit" value="Login")
+
+include ../partials/materializeScript.pug
