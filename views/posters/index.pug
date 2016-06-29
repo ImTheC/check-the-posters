@@ -16,10 +16,7 @@ include ../partials/nav
 						a(href="/posters/" + poster.id): img(src=poster.imgurl)
 					.card-action#heart
 						a(href="#"): span.card-title.red-text &#10084;
-						if poster.hearts
-							span#hearts-total= " " + poster.hearts
-						else
-							span#hearts-total= " 0"
+						span#hearts-total= " " + poster.hearts
 						span.hide#id #{poster.id}
 
 include ../partials/materializeScript
