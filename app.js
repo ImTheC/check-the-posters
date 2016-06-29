@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var passport = require('passport');
 var session = require('cookie-session');
+var flash = require('connect-flash');
 
 require('dotenv').load();
 
@@ -25,19 +26,18 @@ app.set('view engine', 'pug');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-	extended: true
-}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser(process.env.SECRET));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method"));
 app.use(session({
-  secret: process.env.SECRET_KEY,
+  secret: process.env.SECRET,
 	name: 'POSTRAPP',
-	maxage: 360000
+	maxage: 8888888
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 app.use('/auth', auth);
 app.use('/', routes);

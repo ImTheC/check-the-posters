@@ -9,7 +9,7 @@ block content
       thead
         th ID
         th Name
-        th Email
+        th Username
         th Edit User
         th Delete User
       tbody
@@ -17,7 +17,7 @@ block content
           tr
             td #{user.id}
             td #{user.name}
-            td #{user.email}
+            td #{user.username}
             td
               a(href="/users/" + user.id + "/edit") Edit
             td

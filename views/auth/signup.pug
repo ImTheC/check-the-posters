@@ -3,18 +3,21 @@ include ../partials/nav.pug
 
 block content
   div.container
-    h1 #{title}
-    form(action="/users", method="POST")
+    if(message.length)
+      div.alert=message
+    h1 Signup
+    form(action="/auth/signup", method="POST")
       div.input-field
         input(id="name" type="text" name="user[name]")
         label(for="name") Name
       div.input-field
-        input(id="username" type="text" name="user[username]")
+        input(id="username" type="email" name="user[username]")
         label(for="username") Email
       div.input-field
-        input(id="password" type="text" name="user[password]")
+        input(id="password" type="password" name="user[password]")
         label(for="password") Password
       div.row
-        input(class="btn btn-primary" type="submit" value="Submit")
+        input(class="btn btn-primary" type="submit" value="Sign Up")
+  a(href="/login") Already have an account? Log in here
 
 include ../partials/materializeScript.pug

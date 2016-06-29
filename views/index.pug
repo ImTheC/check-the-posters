@@ -1,6 +1,8 @@
 include partials/header
 include partials/nav
 
-h1= title
+block content
+  div.container
+    h1 #{title}
 
 include partials/materializeScript
