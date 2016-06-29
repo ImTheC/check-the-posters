@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var postersRoute = require('./routes/posters');
 var passport = require('passport');
 var session = require('cookie-session');
 
@@ -14,6 +13,7 @@ require('dotenv').load();
 var auth = require('./routes/auth');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var postersRoute = require('./routes/posters');
 
 var app = express();
 
