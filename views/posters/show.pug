@@ -7,6 +7,7 @@ include ../partials/nav
 			h2.text-accent #{poster.name}
 			if user === poster.user_id
 				a(href='#') edit
+	.row
 		.col.s12.m4
 			img.poster.materialboxed(src=poster.imgurl)
 		.col.s12.m8.flow-text
@@ -21,7 +22,7 @@ include ../partials/nav
 			p
 				span.bold On:
 				br
-				span.indent #{poster.date}
+				span.indent #{poster.starting}
 
 			p
 				span.bold From:
@@ -40,5 +41,12 @@ include ../partials/nav
 				p.bold HEARTS: #{poster.hearts}
 			else
 				p.bold HEARTS: 0
+	.row
+		.col.s12
+			p.flow-text.bold Map
+	.row
+		.col.s12
+			#map.input-field.col.s8.offset-s1.z-depth-1
 
+include ../partials/maps
 include ../partials/materializeScript

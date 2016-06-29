@@ -8,6 +8,12 @@ Accent:
 		Deep Orange A200  === .deep-orange .accent-2 === #ff6e40
 */
 
+#map {
+	border: 1px solid black;
+	height: 225px;
+	width: 450px;
+}
+
 .color-primary {
 	background-color: #607d8b;
 }
