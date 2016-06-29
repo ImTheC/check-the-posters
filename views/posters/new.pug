@@ -12,7 +12,7 @@ include ../partials/nav
 					label(for='event_name') Event Name:
 				.input-field.col.s6
 					label(for='date') Date:
-					input#date.validate.datepicker(type='date' name="poster[date]" required)
+					input#date.validate.datepicker(type='date' name="date" required)
 			.row
 				.input-field.col.s6.validate
 					label(for='start_time') Starting At:
@@ -20,9 +20,9 @@ include ../partials/nav
 					label(for='start_time') Ending At:
 			.row
 				.input-field.col.s6
-					input#start_time.validate.timepicker(type='time' placeholder="18:00" name="poster[start_time]" required)
+					input#start_time.validate.timepicker(type='time' placeholder="18:00" name="poster[starting]" required)
 				.input-field.col.s6
-					input#end_time.validate.timepicker(type='time' placeholder="19:00" name="poster[end_time]" required)
+					input#end_time.validate.timepicker(type='time' placeholder="19:00" name="poster[ending]" required)
 			.row
 				.input-field.col.s12
 					input#address.validate(type='text' name="poster[address]" required)
@@ -39,7 +39,7 @@ include ../partials/nav
 					label(for='zip') Zip:
 			.row
 				.input-field.col.s12
-					input#details.validate(type='text' placeholder="                   You can add extra details here if needed." name="poster[details]")
+					input#details.validate(type='text' placeholder="									 You can add extra details here if needed." name="poster[details]")
 					label(for='details') Details:
 			.row
 				.input-field.col.s12

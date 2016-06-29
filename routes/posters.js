@@ -12,7 +12,7 @@ var Hearts = function () {
 
 // ### NEED TO ADD BACK IN ONCE LOGIN IS ADDED ###
 var loggedIn = function(req, res, next) {
-	// var user_id = req.signedCookies.userID;
+	// var user_id = req.user.id;
 	//
 	// if ( user_id ) {
 	next();
@@ -38,12 +38,18 @@ var authorized = function(req, res, next) {
 router.route('/')
 
 	.get(function (req, res) {
-		Posters().orderBy('date', 'asc').then(function(posters){
-			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters });
-		});
+		var today = new Date();
+		// Posters().where('starting', '<', today).andWhere('ending', '>', today).orderBy('starting', 'asc').then(function(happeningNow){
+			Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
+				res.render('posters/index', {title: "Poster Pole Front Page", posters:posters, today: today});
+			});
+		// });
 	})
 
 	.post(function(req, res){
+		req.body.poster.starting = req.body.date + "T" + req.body.poster.starting;
+		req.body.poster.ending = req.body.date + "T" + req.body.poster.ending;
+
 		knex("posters").insert(req.body.poster, "id").then(function(id){
 			res.redirect("/posters/" + id);
 		});
