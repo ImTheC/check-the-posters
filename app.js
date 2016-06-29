@@ -33,7 +33,7 @@ app.use(methodOverride("_method"));
 app.use(session({
   secret: process.env.SECRET,
 	name: 'POSTRAPP',
-	maxage: 888888
+	maxage: 8888888
 }));
 app.use(passport.initialize());
 app.use(passport.session());
