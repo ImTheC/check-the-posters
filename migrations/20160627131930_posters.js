@@ -12,7 +12,7 @@ exports.up = function (knex, Promise) {
 		table.time("end_time");
 		table.string("category");
 		table.string("details");
-		table.integer("hearts");
+		table.integer("hearts").defaultTo(0);
 		table.integer("user_id").unsigned().index().references("users.id").onDelete('cascade');
 	});
 };

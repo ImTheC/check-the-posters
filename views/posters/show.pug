@@ -1,20 +1,44 @@
 include ../partials/header
 include ../partials/nav
 
-	.container
-		.row
-			.col.s12.m6
-				img(src='#{poster.imgurl}')
-				if user === poster.user_id
-					p
-						a(href='#') edit
-				h2 #{poster.name}
-					p
-						| Location: #{poster.location}
-						| On #{poster.date}
-						| From #{poster.start_time} to #{poster.end_time}
-						| #{poster.details}
-						| #{poster.hearts}
-						| #{poster.date}
+.container
+	.row
+		.col.s12
+			h2.text-accent #{poster.name}
+			if user === poster.user_id
+				a(href='#') edit
+		.col.s12.m4
+			img.poster.materialboxed(src=poster.imgurl)
+		.col.s12.m8.flow-text
+			p
+				span.bold Address:
+				br
+				span.indent #{poster.address}
+				br
+				span.indent #{poster.city}, #{poster.state}, #{poster.zip}
+				br
+
+			p
+				span.bold On:
+				br
+				span.indent #{poster.date}
+
+			p
+				span.bold From:
+				br
+				span.indent= poster.start_time + " "
+				span.bold= "to "
+				| #{poster.end_time}
+
+			unless poster.details == ""
+				p
+					span.bold Details:
+					br
+					span.indent #{poster.details}
+
+			if poster.hearts
+				p.bold HEARTS: #{poster.hearts}
+			else
+				p.bold HEARTS: 0
 
 include ../partials/materializeScript

@@ -1,31 +1,23 @@
 include ../partials/header
 include ../partials/nav
 
-	.container
-		.row
-			each poster in posters
-				.col.s12.m6.card.hoverable
-					.card-image.waves-effect.waves-block.waves-light
-						img.activator(src='#{poster.imgurl}')
-					.card-content
-						span.card-title.activator.grey-text.text-darken-4
-							| #{poster.name}
-							i.material-icons.right more_vert
-						if user === poster.user_id
-							p
-								a(href='#') edit
-					.card-reveal
-						span.card-title.grey-text.text-darken-4
-							| #{poster.name}
-							i.material-icons.right close
-						p
-							| Location: #{poster.location}
-							| On #{poster.date}
-							| From #{poster.start_time} to #{poster.end_time}
-							| #{poster.details}
-							| #{poster.hearts}
-							| #{poster.date}
 
-
+//- .container
+//- 	.row
+//- 		.col.s12#poster.center
+.section
+.section
+.container
+	.row
+		each poster in posters
+			.col.s12.m4
+				.card.grow
+					.card-image
+						a(href="/posters/" + poster.id): img(src=poster.imgurl)
+					.card-action#heart
+						a(href="#"): span.card-title.red-text &#10084;
+						span#hearts-total= " " + poster.hearts
+						span.hide#id #{poster.id}
 
 include ../partials/materializeScript
+script(type="text/javascript" src="/javascripts/index.js")

@@ -62,3 +62,30 @@ Accent:
 .subnav li a:hover {
     background-color: #37474f;
 }
+
+.bold {
+	font-weight: bold;
+}
+
+.indent {
+	margin-left: 10px;
+}
+
+.poster {
+	width: 250px;
+	height: auto;
+}
+
+/* Only if screen not small */
+@media screen and (min-width: 600px) {
+
+	.grow {
+		transition: all .5s ease-in-out;
+	}
+
+	.grow:hover {
+		transform: scale(1.5);
+		z-index: 100;
+	}
+
+}
