@@ -38,7 +38,7 @@ var authorized = function(req, res, next) {
 router.route('/')
 
 	.get(function (req, res) {
-		Posters().then(function(posters){
+		Posters().orderBy('date', 'desc').then(function(posters){
 			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters });
 		});
 	})
