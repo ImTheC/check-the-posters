@@ -103,12 +103,12 @@ router.get('/:poster_id', function (req, res) {
 });
 
 
-/* EDIT PAGE FOR SPECIFIC POSTER */
-router.get('/:poster_id/edit', function (req, res) {
-	Posters().where("id", req.params.poster_id).first().then(function(poster){
-		res.render('posters/edit', {title: "Poster Page", poster:poster });
-	});
-});
+// /* EDIT PAGE FOR SPECIFIC POSTER */
+// router.get('/:poster_id/edit', function (req, res) {
+// 	Posters().where("id", req.params.poster_id).first().then(function(poster){
+// 		res.render('posters/edit', {title: "Poster Page", poster:poster });
+// 	});
+// });
 
 
 /* DELETE OR EDIT POSTER */
