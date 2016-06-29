@@ -70,8 +70,7 @@ router.route('/:poster_id/heart')
 
 			if (hearted) {   // If user has already hearted then -1 to heart and delete hearted entry
 				Posters().where("id", req.params.poster_id).select("hearts").first().then(function(hearts){
-					hearts.hearts = hearts.hearts-1;
-					Posters().where("id", req.params.poster_id).update({hearts: hearts.hearts}).then(function(){
+					Posters().where("id", req.params.poster_id).decrement('hearts', 1).then(function(){
 						Hearts().where("id", heartsIndex).del().then(function(){
 							res.send("minus");
 						});
@@ -79,8 +78,7 @@ router.route('/:poster_id/heart')
 				});
 			} else {     // Else user hasn't already hearted, add it
 				Posters().where("id", req.params.poster_id).select("hearts").first().then(function(hearts){
-						hearts.hearts = hearts.hearts+1;
-					Posters().where("id", req.params.poster_id).update({hearts: hearts.hearts}).then(function(){
+					Posters().where("id", req.params.poster_id).increment('hearts', 1).then(function(){
 						Hearts().where("id", heartsIndex).insert({user_id: user_id, poster_id: req.params.poster_id}).then(function(){
 							res.send("plus");
 						});
