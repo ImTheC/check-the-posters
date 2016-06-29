@@ -10,11 +10,14 @@ require('locus');
 function Users() {
   return knex('users');
 }
+
+// Get currentUser for users views
 router.use(authHelpers.currentUser);
 router.use(authHelpers.checkAuthentication);
 
 /* Index, get all users. */
 router.get('/', authHelpers.ensureAdmin, (req, res, next) => {
+  // eval(locus);
   Users().then((users) => {
     res.render('users/index', {title: 'All Users', users: users})
   })
@@ -52,9 +55,9 @@ router.put('/:id', authHelpers.ensureCorrectUser, (req, res) => {
 })
 
 // Delete a user
-router.delete('/:id', authHelpers.ensureAdmin, (req, res) => {
+router.delete('/:id', (authHelpers.ensureAdmin || authHelpers.ensureCorrectUser), (req, res) => {
   Users().where('id', req.params.id).del().then((user) => {
-    req.logout();
+    // req.logout();
     res.redirect('/');
   })
 })

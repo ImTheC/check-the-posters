@@ -12,12 +12,16 @@ passport.use(new TwitterStrategy({
 
     var name = profile.displayName;
     var username = profile.userName;
-    var oauthID = profile.userId;
+    var oauthid = profile.userId;
 
     // update the user if s/he exists or add a new user
     knex('users').where({ oauthid }).first().then((user) =>{
       if (!user) {
-        // Knex create up user here.
+        knex('users').insert({
+          name: name,
+          username: username,
+          oauthid: oauthid
+        }, "*")
       }
       return done(null, user);
     }).catch((err) => {

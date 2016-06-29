@@ -5,7 +5,7 @@ var authHelpers = require('../auth/authHelpers');
 var passwordHelpers = require('../auth/passwordHelpers');
 
 router.use(authHelpers.currentUser);
-router.use(authHelpers.checkAuthentication);
+// router.use(authHelpers.checkAuthentication);
 
 var Posters = function () {
 	return knex('posters');
@@ -14,28 +14,6 @@ var Posters = function () {
 var Hearts = function () {
 	return knex('hearts');
 };
-
-// ### NEED TO ADD BACK IN ONCE LOGIN IS ADDED ###
-var loggedIn = function(req, res, next) {
-	// var user_id = req.user.id;
-	//
-	// if ( user_id ) {
-	next();
-	// } else {
-	// 	res.status(401).redirect('/');
-	// }
-};
-
-var authorized = function(req, res, next) {
-	// var user_id = req.signedCookies.userID;
-	//
-	// if ( user_id === req.params.id ) {
-	next();
-	// } else {
-	// 	res.status(401).redirect('/');
-	// }
-};
-
 
 /* GET All POSTERS.
 					&
@@ -52,6 +30,7 @@ router.route('/')
 	.post(function(req, res){
 		req.body.poster.starting = req.body.date + "T" + req.body.poster.starting;
 		req.body.poster.ending = req.body.date + "T" + req.body.poster.ending;
+		req.body.poster.user_id = req.user.id;
 
 		knex("posters").insert(req.body.poster, "id").then(function(id){
 			res.redirect("/posters/" + id);
@@ -98,7 +77,7 @@ router.route('/:poster_id/heart')
 	});
 
 /* CREATE NEW POSTERS PAGE. */
-router.get('/new', loggedIn, function (req, res) {
+router.get('/new', authHelpers.checkAuthentication, function (req, res) {
 	res.render('posters/new', {title: "New Poster"});
 });
 
@@ -110,21 +89,25 @@ router.get('/:poster_id', function (req, res) {
 });
 
 
-// /* EDIT PAGE FOR SPECIFIC POSTER */
-// router.get('/:poster_id/edit', function (req, res) {
-// 	Posters().where("id", req.params.poster_id).first().then(function(poster){
-// 		res.render('posters/edit', {title: "Poster Page", poster:poster });
-// 	});
-// });
+/* EDIT PAGE FOR SPECIFIC POSTER */
+router.get('/:poster_id/edit', authHelpers.checkAuthentication, function (req, res) {
+	Posters().where("id", req.params.poster_id).first().then(function(poster){
+		if (req.user.id === poster.user_id) {
+			res.render('posters/edit', {title: "Poster Page", poster:poster });
+		} else {
+			res.redirect('/');
+		}
+	});
+});
 
 
 /* DELETE OR EDIT POSTER */
-router.route('/:poster_id', authorized)
+router.route('/:poster_id', authHelpers.checkAuthentication)
 
 	.delete(function(req, res){
 		res.send('This would have been DELETED!');
 		// Posters().where('id', req.params.poster_id).delete().then(function(){
-		// 	res.redirect('/');
+		// 	res.redirect('/');gi
 		// });
 	})
 
