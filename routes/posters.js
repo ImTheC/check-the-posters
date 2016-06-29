@@ -39,11 +39,9 @@ router.route('/')
 
 	.get(function (req, res) {
 		var today = new Date();
-		// Posters().where('starting', '<', today).andWhere('ending', '>', today).orderBy('starting', 'asc').then(function(happeningNow){
 			Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
 				res.render('posters/index', {title: "Poster Pole Front Page", posters:posters, today: today});
 			});
-		// });
 	})
 
 	.post(function(req, res){
