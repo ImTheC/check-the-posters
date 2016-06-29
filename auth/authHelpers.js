@@ -2,7 +2,7 @@ const authMiddleware = {
   checkAuthentication(req, res, next) {
     // can use req.isAuthenticated() for this too..
     if (!req.user) {
-      req.flash('loginMessage', "Please log in first")
+      req.flash('loginMessage', "Please login")
       return res.redirect('/auth/login');
     }
     else {
@@ -44,9 +44,9 @@ const authMiddleware = {
       return next();
     }
   },
-  ensureCorrectUserForPost(req,res,next){
+  ensureCorrectUserForPoster(req,res,next){
     if(+req.params.user_id !== req.user.id){
-      return res.redirect(`/users/${req.user.id}/posts`)
+      return res.redirect(`/users/${req.user.id}`)
     }
     else {
       return next();
