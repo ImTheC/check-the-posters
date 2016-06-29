@@ -4,7 +4,7 @@ include ../partials/nav.pug
 block content
   div.container
     h1 #{title}
-    form(action="/users/=user.id?_method=PUT", method="POST")
+    form(action="/users/" + user.id + "?_method=PUT", method="POST")
       div.input-field
         input(id="name" type="text" name="user[name]" value=user.name)
         label(for="name") Name

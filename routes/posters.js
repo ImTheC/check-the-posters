@@ -39,7 +39,7 @@ router.route('/')
 			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters });
 		});
 	})
-
+	
 	.post(function(req, res){
 		knex("posters").insert(req.body.poster, "id").then(function(id){
 			res.redirect("/posters/" + id);
