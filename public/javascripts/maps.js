@@ -12,7 +12,7 @@ function geocodeAddress(geocoder, resultsMap, address) {
 		if (status === google.maps.GeocoderStatus.OK) {
 
 		var mapDiv = "<div id='map' class='z-depth-1'></div>";
-		$('#placeMapHere').appendTo(mapDiv);
+		$('#placeMapHere').append(mapDiv);
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 8,
 			center: {lat: 30.267153, lng: -97.74306079999997} // Austin, TX
