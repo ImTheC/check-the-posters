@@ -145,8 +145,15 @@ router.get('/:poster_id/edit', authHelpers.checkAuthentication, function (req, r
 router.route('/:poster_id', authHelpers.checkAuthentication)
 
 	.delete(function(req, res){
-		Posters().where('id', req.params.poster_id).delete().then(function(){
-			res.status(200).send(true);
+		Posters().where('id', req.params.poster_id).first().then(function(poster){
+			if ( poster.user_id === req.user.id ) {
+				Posters().where('id', req.params.poster_id).delete().then(function(){
+					res.status(200).send(true);
+				});
+			} else {
+				res.flash('error', "Not Authorized");
+				res.send(401).redirect('/');
+			}
 		});
 	})
 
