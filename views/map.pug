@@ -1,0 +1,22 @@
+include partials/header
+include partials/nav
+
+h1 #{title}
+
+.container
+	.row
+		.col.s12
+			#floating-panel
+				#floating-panel
+					input#address(type='textbox', value='118 Nueces St, , Austin, TX, 78701')
+					input#submit(type='button', value='Geocode')
+					#firstComponent
+					#secondComponent
+	.row
+		.col.s12
+				#map
+script(type="text/javascript" src="/javascripts/maps.js")
+script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo-q4oyHyb8PboBomFwwpcVfVXDlW1Rn0&v=3&callback=initMap")
+
+
+include partials/materializeScript

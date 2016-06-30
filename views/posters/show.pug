@@ -4,49 +4,45 @@ include ../partials/nav
 .container
 	.row
 		.col.s12
-			h2.text-accent #{poster.name}
-			if user === poster.user_id
-				a(href='#') edit
+			h2.left.text-accent #{poster.name}
 	.row
 		.col.s12.m4
 			img.poster.materialboxed(src=poster.imgurl)
-		.col.s12.m8.flow-text
-			p
+			if poster.hearts
+				p.bold.left.red-text &#10084; #{poster.hearts}
+			else
+				p.bold.left.red-text &#10084; 0
+			if currentUser
+				p.bold.right: a(href='/posters/'+poster.id+'/edit') edit
+		.col.s12.m6.offset-m2.flow-text
+			#map.z-depth-1
+			p.flow-text
 				span.bold Address:
 				br
-				span.indent #{poster.address}
-				br
-				span.indent #{poster.city}, #{poster.state}, #{poster.zip}
-				br
-
+				span.indent #{poster.address}, #{poster.city}, #{poster.state}, #{poster.zip}
+	.row
+		.col.s4.flow-text
 			p
 				span.bold On:
 				br
-				span.indent #{poster.starting}
-
-			p
+				span.indent #{poster.date}
+		.col.s4
+			p.flow-text
 				span.bold From:
 				br
 				span.indent= poster.start_time + " "
 				span.bold= "to "
 				| #{poster.end_time}
-
+		.col.s4
 			unless poster.details == ""
-				p
+				p.flow-text
 					span.bold Details:
 					br
 					span.indent #{poster.details}
+.section
+	.hide
+		input#address(type='textbox', value=poster.address + ", " + poster.city + ", " + poster.state + " " + poster.zip)
 
-			if poster.hearts
-				p.bold HEARTS: #{poster.hearts}
-			else
-				p.bold HEARTS: 0
-	.row
-		.col.s12
-			p.flow-text.bold Map
-	.row
-		.col.s12
-			#map.input-field.col.s8.offset-s1.z-depth-1
-
-include ../partials/maps
+script(type="text/javascript" src="../javascripts/maps.js")
+script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo-q4oyHyb8PboBomFwwpcVfVXDlW1Rn0&v=3&callback=initMap")
 include ../partials/materializeScript

@@ -40,7 +40,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use('/auth', auth);
-app.use('/', routes);
+app.use('/', postersRoute);
 app.use('/users', users);
 app.use('/posters', postersRoute);
 
