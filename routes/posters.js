@@ -158,13 +158,20 @@ router.route('/:poster_id', authHelpers.checkAuthentication)
 	})
 
 	.put(function(req, res){
-		req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
-		req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
-		req.body.poster.id = req.params.poster_id;
-		req.body.poster.date = formatDate(req.body.poster.date);
+		Posters().where('id', req.params.poster_id).first().then(function(poster){
+			if ( poster.user_id === req.user.id ) {
+				req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
+				req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
+				req.body.poster.id = req.params.poster_id;
+				req.body.poster.date = formatDate(req.body.poster.date);
 
-		Posters().where('id', req.body.poster.id).update(req.body.poster).then(function(){
-			res.redirect('/' + req.params.poster_id);
+				Posters().where('id', req.body.poster.id).update(req.body.poster).then(function(){
+					res.redirect('/' + req.params.poster_id);
+				});
+			} else {
+				res.flash('error', "Not Authorized");
+				res.send(401).redirect('/');
+			}
 		});
 	});
 
