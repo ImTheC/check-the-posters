@@ -116,13 +116,21 @@ router.get('/new', authHelpers.checkAuthentication, function (req, res) {
 
 /* GET SPECIFIC POSTER PAGE*/
 router.get('/:poster_id', function (req, res) {
+	var authorized = false;
 	if ( isNaN(req.params.poster_id) ) {
 		res.redirect("/");
 	} else {
 		Posters().where("id", req.params.poster_id).first().then(function(poster){
 			poster.start_time = standardTime(poster.start_time); // change military time to standard
 			poster.end_time = standardTime(poster.end_time);
-			res.render('posters/show', {title: "Poster Page", poster:poster});
+
+			if ( req.user && req.user.id === poster.user_id ) {   // Check if authorized
+				authorized = true;
+			} else {
+				authorized = false;
+			}
+
+			res.render('posters/show', {title: "Poster Page", poster:poster, authorized: authorized});
 		});
 	}
 });
