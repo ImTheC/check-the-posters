@@ -63,7 +63,7 @@ router.route('/')
 	.post(function(req, res){
 		req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
 		req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
-		req.body.poster.user_id = res.user.id;
+		req.body.poster.user_id = req.user.id;
 		req.body.poster.date = formatDate(req.body.poster.date);
 
 		knex("posters").insert(req.body.poster, "id").then(function(id){
