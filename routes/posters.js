@@ -28,9 +28,10 @@ router.route('/')
 	})
 
 	.post(function(req, res){
+		eval(locus);
 		req.body.poster.starting = req.body.date + "T" + req.body.poster.starting;
 		req.body.poster.ending = req.body.date + "T" + req.body.poster.ending;
-		req.body.poster.user_id = currentUser.id;
+		req.body.poster.user_id = req.user.id;
 
 
 		knex("posters").insert(req.body.poster, "id").then(function(id){
