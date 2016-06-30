@@ -22,21 +22,21 @@ router.get('/', authHelpers.ensureAdmin, (req, res, next) => {
   })
 });
 
-// Create User
-router.get('/new', (req, res) => {
-  res.render('users/new', {title: 'Create User'});
-})
-
-router.post('/', (req, res) => {
-  Users().insert(req.body.user).then((user) => {
-    res.redirect('/');
-  })
-})
+// Create User, authentication route handle this now
+// router.get('/new', (req, res) => {
+//   res.render('users/new', {title: 'Create User'});
+// })
+//
+// router.post('/', (req, res) => {
+//   Users().insert(req.body.user).then((user) => {
+//     res.redirect('/');
+//   })
+// })
 
 // Read a single user
 router.get('/:id', authHelpers.ensureCorrectUser, (req, res) => {
   Users().where('id', req.params.id).first().then((user) => {
-    res.json(user);
+    res.render('users/show', {title: 'Show User', user: user})
   })
 })
 
@@ -48,15 +48,24 @@ router.get('/:id/edit', authHelpers.ensureCorrectUser, (req, res) => {
 })
 
 router.put('/:id', authHelpers.ensureCorrectUser, (req, res) => {
-  Users().where('id', req.params.id).update(req.body.user).then((user) => {
-    res.redirect('/');
+  passwordHelpers.editUser(req).then((user) => {
+    res.redirect(`/users`);
+  }).catch((err)=> {
+    if (err.constraint === 'users_username_unique') {
+      err.message = "username is already taken"
+    }
+    req.flash('loginMessage', err.message)
+    res.redirect(`/users/${req.user.id}/edit`);
   })
+  // Users().where('id', req.params.id).update(req.body.user).then((user) => {
+  //   res.redirect('/');
+  // })
 })
 
 // Delete a user
-router.delete('/:id', (authHelpers.ensureAdmin || authHelpers.ensureCorrectUser), (req, res) => {
+router.delete('/:id', authHelpers.ensureCorrectUser, (req, res) => {
   Users().where('id', req.params.id).del().then((user) => {
-    // req.logout();
+    req.logout();
     res.redirect('/');
   })
 })

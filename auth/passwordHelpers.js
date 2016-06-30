@@ -38,7 +38,7 @@ exports.editUser =(req)=> {
       const salt = bcrypt.genSaltSync()
       const hash = bcrypt.hashSync(req.body.user.password, salt);
       return knex('users').where({id: req.params.id}).update({
-        name: req.body.name,
+        name: req.body.user.name,
         username: req.body.user.username,
         password:hash,
       }, "*")
