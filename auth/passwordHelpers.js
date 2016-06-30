@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const knex = require("../db/knex")
+const knex = require("../db/knex");
 
 const handleErrors = (req) => {
   return new Promise((resolve,reject) => {

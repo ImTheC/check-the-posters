@@ -17,7 +17,6 @@ router.use(authHelpers.checkAuthentication);
 
 /* Index, get all users. */
 router.get('/', authHelpers.ensureAdmin, (req, res, next) => {
-  // eval(locus);
   Users().then((users) => {
     res.render('users/index', {title: 'All Users', users: users})
   })

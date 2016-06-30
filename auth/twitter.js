@@ -1,5 +1,6 @@
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter');
+var knex = require("../db/knex");
 
 var init = require('./init');
 
@@ -10,25 +11,22 @@ passport.use(new TwitterStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
 
-    var name = profile.displayName;
-    var username = profile.userName;
-    var oauthid = profile.userId;
-
     // update the user if s/he exists or add a new user
-    knex('users').where({ oauthid }).first().then((user) =>{
-      if (!user) {
+    knex('users').where('username', profile.username).first().then((user) =>{
+      if (user) {
+        done(null, user);
+      } else {
         knex('users').insert({
-          name: name,
-          username: username,
-          oauthid: oauthid
-        }, "*")
-      }
-      return done(null, user);
-    }).catch((err) => {
-      return done(err)
+          name: profile.displayName,
+          username: profile.username,
+          oauthid: profile.id
+        }, "id").then((user) => {
+          done(null, user);
+          })
+        }
     })
   }
-));
+))
 
 // serialize user into the session
 init();

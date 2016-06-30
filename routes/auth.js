@@ -7,6 +7,7 @@ var knex = require('../db/knex');
 // var passport = require('passport');
 
 var passportLocal = require('../auth/local');
+var passportTwitter = require('../auth/twitter');
 
 /* GET signup */
 router.get('/signup', authHelpers.preventLoginSignup, (req,res) => {
@@ -49,9 +50,19 @@ router.post('/signup', authHelpers.preventLoginSignup, (req, res, next)  => {
 
 /* Authenticate user when logging in */
 router.post('/login', passportLocal.authenticate('local', {
-  successRedirect: '/users',
+  successRedirect: '/posters',
   failureRedirect: '/auth/login'
 }))
+
+/* Authenticate user with twitter */
+router.get('/twitter', passportTwitter.authenticate('twitter'));
+
+router.get('/twitter/callback',
+  passportTwitter.authenticate('twitter', { failureRedirect: '/auth/login' }),
+  (req, res) => {
+    // Successful authentication
+    res.redirect('/posters');
+  })
 
 /* Log out */
 router.get('/logout', authHelpers.checkAuthentication, (req,res) => {
