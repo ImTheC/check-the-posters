@@ -116,13 +116,21 @@ router.get('/new', authHelpers.checkAuthentication, function (req, res) {
 
 /* GET SPECIFIC POSTER PAGE*/
 router.get('/:poster_id', function (req, res) {
+	var authorized = false;
 	if ( isNaN(req.params.poster_id) ) {
 		res.redirect("/");
 	} else {
 		Posters().where("id", req.params.poster_id).first().then(function(poster){
 			poster.start_time = standardTime(poster.start_time); // change military time to standard
 			poster.end_time = standardTime(poster.end_time);
-			res.render('posters/show', {title: "Poster Page", poster:poster});
+
+			if ( req.user && req.user.id === poster.user_id ) {   // Check if authorized
+				authorized = true;
+			} else {
+				authorized = false;
+			}
+
+			res.render('posters/show', {title: "Poster Page", poster:poster, authorized: authorized});
 		});
 	}
 });
@@ -145,19 +153,33 @@ router.get('/:poster_id/edit', authHelpers.checkAuthentication, function (req, r
 router.route('/:poster_id', authHelpers.checkAuthentication)
 
 	.delete(function(req, res){
-		Posters().where('id', req.params.poster_id).delete().then(function(){
-			res.status(200).send(true);
+		Posters().where('id', req.params.poster_id).first().then(function(poster){
+			if ( poster.user_id === req.user.id ) {
+				Posters().where('id', req.params.poster_id).delete().then(function(){
+					res.status(200).send(true);
+				});
+			} else {
+				res.flash('error', "Not Authorized");
+				res.send(401).redirect('/');
+			}
 		});
 	})
 
 	.put(function(req, res){
-		req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
-		req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
-		req.body.poster.id = req.params.poster_id;
-		req.body.poster.date = formatDate(req.body.poster.date);
+		Posters().where('id', req.params.poster_id).first().then(function(poster){
+			if ( poster.user_id === req.user.id ) {
+				req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
+				req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
+				req.body.poster.id = req.params.poster_id;
+				req.body.poster.date = formatDate(req.body.poster.date);
 
-		Posters().where('id', req.body.poster.id).update(req.body.poster).then(function(){
-			res.redirect('/' + req.params.poster_id);
+				Posters().where('id', req.body.poster.id).update(req.body.poster).then(function(){
+					res.redirect('/' + req.params.poster_id);
+				});
+			} else {
+				res.flash('error', "Not Authorized");
+				res.send(401).redirect('/');
+			}
 		});
 	});
 

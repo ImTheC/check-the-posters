@@ -12,10 +12,9 @@ include ../partials/nav
 				p.bold.left.red-text &#10084; #{poster.hearts}
 			else
 				p.bold.left.red-text &#10084; 0
-			if currentUser
+			if authorized
 				p.bold.right: a(href='/posters/'+poster.id+'/edit') edit
-		.col.s12.m6.offset-m2.flow-text
-			#map.z-depth-1
+		.col.s12.m6.offset-m2.flow-text#placeMapHere
 			p.flow-text
 				span.bold Address:
 				br
