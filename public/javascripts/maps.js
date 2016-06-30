@@ -14,7 +14,7 @@ function geocodeAddress(geocoder, resultsMap, address) {
 	console.log(address);
 	geocoder.geocode({'address': address}, function(results, status) {
 		if (status === google.maps.GeocoderStatus.OK) {
-		document.getElementById('map').className = "";
+		document.getElementById('hideMap').className = "";
 		var marker = new google.maps.Marker({
 				map: resultsMap,
 				animation: google.maps.Animation.DROP,
