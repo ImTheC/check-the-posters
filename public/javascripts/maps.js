@@ -1,4 +1,8 @@
 function initMap() {
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 8,
+		center: {lat: 30.267153, lng: -97.74306079999997} // Austin, TX
+	});
 
 	var geocoder = new google.maps.Geocoder();
 	var address = document.getElementById('address').value;
@@ -11,13 +15,6 @@ function geocodeAddress(geocoder, resultsMap, address) {
 	geocoder.geocode({'address': address}, function(results, status) {
 		if (status === google.maps.GeocoderStatus.OK) {
 
-		var mapDiv = "<div id='map' class='z-depth-1'></div>";
-		$('#placeMapHere').append(mapDiv);
-		var map = new google.maps.Map(document.getElementById('map'), {
-			zoom: 8,
-			center: {lat: 30.267153, lng: -97.74306079999997} // Austin, TX
-		});
-
 		var marker = new google.maps.Marker({
 				map: resultsMap,
 				animation: google.maps.Animation.DROP,
@@ -28,7 +25,7 @@ function geocodeAddress(geocoder, resultsMap, address) {
 			resultsMap.setZoom(15);
 
 		} else {
-			console.log("Unable to load address for map.");
+			alert('Geocode was not successful for the following reason: ' + status);
 		}
 	});
 }
