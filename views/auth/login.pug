@@ -6,6 +6,11 @@ block content
     if(message.length)
       div.alert=message
     h1 Login
+    div.row
+      a.btn.btn-primary(href="/auth/twitter") Login with Twitter
+
+    span Or login with your account
+
     form(action="/auth/login", method="POST")
       div.input-field
         input(id="username" type="text" name="user[username]")
@@ -14,7 +19,7 @@ block content
         input(id="password" type="password" name="user[password]")
         label(for="password") Password
       div.row
-        input(class="btn btn-primary" type="submit" value="Login")
-    a(href="/auth/twitter") Login with twitter
+        input.btn.btn-primary(type="submit" value="Login")
+
 
 include ../partials/materializeScript.pug

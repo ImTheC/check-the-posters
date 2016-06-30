@@ -6,6 +6,11 @@ block content
     if(message.length)
       div.alert=message
     h1 Signup
+    div.row
+      a.btn.btn-primary(href="/auth/twitter") Continue with Twitter
+
+    span Or sign up an account
+
     form(action="/auth/signup", method="POST")
       div.input-field
         input(id="name" type="text" name="user[name]")

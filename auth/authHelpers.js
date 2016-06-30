@@ -37,11 +37,11 @@ const authMiddleware = {
     }
   },
   ensureCorrectUser(req,res,next){
-    if(+req.params.id !== req.user.id){
-      return res.redirect(`/`)
+    if(req.user.isadmin || (+req.params.id === req.user.id)){
+      return next();
     }
     else {
-      return next();
+      return res.redirect(`/`)
     }
   },
   ensureCorrectUserForPoster(req,res,next){
