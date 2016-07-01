@@ -9,6 +9,8 @@ header
 					li: a(href="/posters/new") New Poster
 					li: a(href="/users/" + currentUser.id) Account
 					li: a(href="/auth/logout") Logout
+					if currentUser.isadmin === true
+						li: a(href="/users") Admin
 			else
 				ul.right
 					li: a(href="/auth/signup") Signup
