@@ -11,6 +11,11 @@ function Users() {
   return knex('users');
 }
 
+// Posters function
+function Posters() {
+  return knex('posters');
+}
+
 // Get currentUser for users views
 router.use(authHelpers.currentUser);
 router.use(authHelpers.checkAuthentication);
@@ -36,9 +41,11 @@ router.get('/', authHelpers.ensureAdmin, (req, res, next) => {
 // Read a single user
 router.get('/:id', authHelpers.ensureCorrectUser, (req, res) => {
   Users().where('id', req.params.id).first().then((user) => {
-    res.render('users/show', {title: 'Show User', user: user})
-  })
-})
+		Posters().where('user_id', req.params.id).then((posters) => {
+			res.render('users/show', {title: 'User Account', user: user, posters: posters});
+		});
+  });
+});
 
 // Update (Edit)
 router.get('/:id/edit', authHelpers.ensureCorrectUser, (req, res) => {
@@ -49,10 +56,10 @@ router.get('/:id/edit', authHelpers.ensureCorrectUser, (req, res) => {
 
 router.put('/:id', authHelpers.ensureCorrectUser, (req, res) => {
   passwordHelpers.editUser(req).then((user) => {
-    res.redirect(`/users`);
+    res.redirect('/users/' + req.params.id);
   }).catch((err)=> {
     if (err.constraint === 'users_username_unique') {
-      err.message = "username is already taken"
+      err.message = "Username is already taken."
     }
     req.flash('loginMessage', err.message)
     res.redirect(`/users/${req.user.id}/edit`);
