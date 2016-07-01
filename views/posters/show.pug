@@ -20,20 +20,16 @@ include ../partials/nav
 				span.bold Address:
 				br
 				span.indent #{poster.address}, #{poster.city}, #{poster.state}, #{poster.zip}
-	.row
-		.col.s4.flow-text
 			p
 				span.bold On:
 				br
 				span.indent #{poster.date}
-		.col.s4
 			p.flow-text
 				span.bold From:
 				br
 				span.indent= poster.start_time + " "
 				span.bold= "to "
 				| #{poster.end_time}
-		.col.s4
 			unless poster.details == ""
 				p.flow-text
 					span.bold Details:
