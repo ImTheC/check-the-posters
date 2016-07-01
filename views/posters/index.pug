@@ -7,11 +7,11 @@ include ../partials/nav
 //- 		.col.s12#poster.center
 .section
 .section
-.container
-	.row
+.container#wrapper
+	.row#columns
 		each poster in posters
-			.col.s12.m4
-				.card.grow
+			.col.pin
+				.card
 					.card-image
 						a(href="/posters/" + poster.id): img(src=poster.imgurl)
 					.card-action#heart

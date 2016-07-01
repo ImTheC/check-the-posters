@@ -82,8 +82,13 @@ Accent:
 	height: auto;
 }
 
+/*.card.large .card-image {
+	max-height: 100% !important;
+  overflow: hidden;
+}*/
+
 /* Make Posters be in columns a la Pintrest */
-/*
+
 #wrapper {
 	width: 90%;
 	max-width: 1100px;
@@ -105,16 +110,16 @@ Accent:
 
 .pin {
 	display: inline-block;
-	background: #FEFEFE;
-	border: 2px solid #FAFAFA;
-	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+	/*background: #FEFEFE;*/
+	/*border: 2px solid #FAFAFA;*/
+	/*box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);*/
 	margin: 0 2px 15px;
 	-webkit-column-break-inside: avoid;
 	-moz-column-break-inside: avoid;
 	column-break-inside: avoid;
-	padding: 15px;
-	padding-bottom: 5px;
-	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+	/*padding: 15px;
+	padding-bottom: 5px;*/
+	/*background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);*/
 	opacity: 1;
 
 	-webkit-transition: all .2s ease;
@@ -123,7 +128,7 @@ Accent:
 	transition: all .2s ease;
 }
 
-.pin img {
+/*.pin img {
 	width: 100%;
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 15px;
@@ -134,7 +139,7 @@ Accent:
 	font: 12px/18px Arial, sans-serif;
 	color: #333;
 	margin: 0;
-}
+}*/
 
 @media (min-width: 960px) {
 	#columns {
@@ -146,11 +151,11 @@ Accent:
 
 @media (min-width: 1100px) {
 	#columns {
-		-webkit-column-count: 4;
-		-moz-column-count: 4;
-		column-count: 4;
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
 	}
-}*/
+}
 
 
 
