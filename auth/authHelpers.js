@@ -1,3 +1,4 @@
+"use strict";
 const authMiddleware = {
   checkAuthentication(req, res, next) {
     // can use req.isAuthenticated() for this too..
