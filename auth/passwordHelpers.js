@@ -8,16 +8,19 @@ const handleErrors = (req) => {
       reject({
         err:'username_length',
         message:'Username is an email'
-      })
+      });
     }
+		else if (req.body.user.password.length === 0) {
+			resolve();
+		}
     else if(req.body.user.password.length < 6) {
       reject({
         err:'password_length',
         message:'Password must be longer than 6 characters'
-      })
+      });
     }
     else {
-      resolve()
+      resolve();
     }
   })
 }
@@ -36,13 +39,20 @@ exports.createUser =(req)=> {
 
 exports.editUser =(req)=> {
     return handleErrors(req).then(() => {
-      const salt = bcrypt.genSaltSync()
-      const hash = bcrypt.hashSync(req.body.user.password, salt);
-      return knex('users').where({id: req.params.id}).update({
-        name: req.body.user.name,
-        username: req.body.user.username,
-        password:hash,
-      }, "*")
+			if ( req.body.user.password == "" ) {
+				return knex('users').where({id: req.params.id}).update({
+	        name: req.body.user.name,
+	        username: req.body.user.username
+      	}, "*");
+			} else {
+	      const salt = bcrypt.genSaltSync();
+	      const hash = bcrypt.hashSync(req.body.user.password, salt);
+	      return knex('users').where({id: req.params.id}).update({
+	        name: req.body.user.name,
+	        username: req.body.user.username,
+	        password:hash,
+      	}, "*");
+			}
     })
 },
 

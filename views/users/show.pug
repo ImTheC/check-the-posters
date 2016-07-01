@@ -2,11 +2,37 @@ include ../partials/header.pug
 include ../partials/nav.pug
 
 block content
-  div.container
-    h5 Hello #{user.name}
-    a(href="#") See your posters!
-    br
-    a(href="/users/" + user.id + "/edit") Edit your account!
-
+div.container
+	div.row
+		div.col.s12
+			h4 #{title}
+	div.row.valign-wrapper
+		div.col.s4
+			p.valign.flow-text
+				span.bold Name:
+				br
+				| #{user.name}
+		div.col.s4
+			p.valign.flow-text
+				span.bold Username or Email:
+				br
+				| #{user.username}
+		div.col.s4
+			a.valign.waves-effect.waves-light.btn(href="/users/" + user.id + "/edit") edit
+	.divider
+	div.row.valign-wrapper.center
+		div.col.s2#prev.valign
+			a(href="#"): h1= "<"
+		div.col.s8.carousel.valign
+			if posters.length > 0
+				each poster in posters
+					a.carousel-item(href="/posters/" + poster.id)
+						img.grow(src=poster.imgurl)
+			else
+				h3= "No posters yet!"
+		div.col.s2#next.valign
+			a(href="#"): h1= ">"
+.section
 
 include ../partials/materializeScript.pug
+script(type="text/javascript" src="../javascripts/carousel.js")

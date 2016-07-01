@@ -2,19 +2,23 @@ include ../partials/header.pug
 include ../partials/nav.pug
 
 block content
-  div.container
-    h1 #{title}
-    form(action="/users/" + user.id + "?_method=PUT", method="POST")
-      div.input-field
-        input(id="name" type="text" name="user[name]" value=user.name)
-        label(for="name") Name
-      div.input-field
-        input(id="email" type="text" name="user[username]" value=user.username)
-        label(for="email") Email
-      div.input-field
-        input(id="password" type="password" name="user[password]")
-        label(for="password") Password
-      div.row
-        input(class="btn btn-primary" type="submit" value="Submit")
+	div.container
+		h1 #{title}
+		form(action="/users/" + user.id + "?_method=PUT", method="POST")
+			div.input-field
+				input(id="name" type="text" name="user[name]" value=user.name)
+				label(for="name") Name
+			div.input-field
+				input(id="email" type="text" name="user[username]" value=user.username)
+				label(for="email") Username or Email
+			div.input-field
+				if user.oauthid
+					input(id="password" type="password" name="user[password]" disabled)
+					label(for="password") Logged in via Twitter. To change password, do so via twitter.
+				else
+					input(id="password" type="password" name="user[password]")
+					label(for="password") Enter new password if desired, otherwise will not change.
+			div.row
+				input(class="btn btn-primary" type="submit" value="Submit")
 
 include ../partials/materializeScript.pug
