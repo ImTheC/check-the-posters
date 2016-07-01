@@ -27,7 +27,7 @@ div.container
 			if posters.length > 0
 				each poster in posters
 					a.carousel-item(href="/posters/" + poster.id)
-						img.grow(src=poster.imgurl)
+						img(src=poster.imgurl)
 			else
 				h3= "No posters yet!"
 		div.col.s2#next.valign
