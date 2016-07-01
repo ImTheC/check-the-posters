@@ -3,7 +3,10 @@ include ../partials/nav.pug
 
 block content
   div.container
-    h1 Hello #{user.name}
+    h5 Hello #{user.name}
+    a(href="#") See your posters!
+    br
+    a(href="/users/" + user.id + "/edit") Edit your account!
 
 
 include ../partials/materializeScript.pug

@@ -1,3 +1,4 @@
+"use strict";
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter');
 var knex = require("../db/knex");
