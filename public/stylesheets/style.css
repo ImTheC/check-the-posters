@@ -87,6 +87,12 @@ Accent:
   overflow: hidden;
 }*/
 
+header img {
+	margin: 5px;
+	margin-left: 10px;
+	height: 50px;
+}
+
 /* Make Posters be in columns a la Pintrest */
 
 #wrapper {
