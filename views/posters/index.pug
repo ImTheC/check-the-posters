@@ -2,10 +2,10 @@ include ../partials/header
 include ../partials/nav
 
 
-.container#wrapper
-	.row#columns
+.wrapper
+	.columns
 		each poster in posters
-			.col.pin
+			.pin
 				.card
 					.card-image
 						a(href="/posters/" + poster.id): img(src=poster.imgurl)

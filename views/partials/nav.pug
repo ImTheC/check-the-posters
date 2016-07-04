@@ -1,21 +1,34 @@
 header
 	nav.color-primary
 		div.nav-wrapper
-			img(src="/images/logo.png")
-			a.brand-logo.left(href="/") POSTER BOARD
+			a(href="/"): img.left(src="/images/logo.png")
+			a.right.button-collapse.hide-on-med-and-up(href='#', data-activates='mobile-menu', class="button-collapse")
+				i.material-icons menu
 
 			if currentUser
-				ul.right
+				ul.right.hide-on-small-only
 					li: a(href="/posters/new") New Poster
 					li: a(href="/users/" + currentUser.id) Account
 					li: a(href="/auth/logout") Logout
 					if currentUser.isadmin === true
 						li: a(href="/users") Admin
 			else
-				ul.right
+				ul.right.hide-on-small-only
 					li: a(href="/auth/signup") Signup
 					li: a(href="/auth/login") Login
-	//- .subnav    // Add category if also
+
+				if currentUser
+					ul#mobile-menu.side-nav
+						li: a(href="/posters/new") New Poster
+						li: a(href="/users/" + currentUser.id) Account
+						li: a(href="/auth/logout") Logout
+						if currentUser.isadmin === true
+							li: a(href="/users") Admin
+				else
+					ul#mobile-menu.side-nav
+						li: a(href="/auth/signup") Signup
+						li: a(href="/auth/login") Login
+	//- .subnav		// Add category if also
 	//- 	.nav-wrapper.color-primary1
 	//- 		ul
 	//- 			li

@@ -11,7 +11,7 @@ Accent:
 #map {
 	border: 1px solid black;
 	height: 250px;
-	width: 450px;
+	width: 100%;
 }
 
 .color-primary {
@@ -82,34 +82,27 @@ Accent:
 	height: auto;
 }
 
-/*.card.large .card-image {
-	max-height: 100% !important;
-  overflow: hidden;
-}*/
-
 header img {
 	margin: 5px;
 	margin-left: 10px;
 	height: 50px;
 }
 
-/* Make Posters be in columns a la Pintrest */
+/* Make Posters be in columns */
 
-#wrapper {
+.wrapper {
 	width: 90%;
-	max-width: 1100px;
-	min-width: 800px;
 	margin: 50px auto;
 }
 
-#columns {
-	-webkit-column-count: 3;
+.columns {
+	-webkit-column-count: 2;
 	-webkit-column-gap: 10px;
 	-webkit-column-fill: auto;
-	-moz-column-count: 3;
+	-moz-column-count: 2;
 	-moz-column-gap: 10px;
 	-moz-column-fill: auto;
-	column-count: 3;
+	column-count: 2;
 	column-gap: 15px;
 	column-fill: auto;
 }
@@ -134,47 +127,10 @@ header img {
 	transition: all .2s ease;
 }
 
-/*.pin img {
-	width: 100%;
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 15px;
-	margin-bottom: 5px;
-}
-
-.pin p {
-	font: 12px/18px Arial, sans-serif;
-	color: #333;
-	margin: 0;
-}*/
-
-@media (min-width: 960px) {
-	#columns {
-		-webkit-column-count: 2;
-		-moz-column-count: 2;
-		column-count: 2;
-	}
-}
-
 @media (min-width: 1100px) {
-	#columns {
+	.columns {
 		-webkit-column-count: 3;
 		-moz-column-count: 3;
 		column-count: 3;
 	}
-}
-
-
-
-/* Only if screen not small */
-@media screen and (min-width: 600px) {
-
-	.grow {
-		transition: all .5s ease-in-out;
-	}
-
-	.grow:hover {
-		transform: scale(1.5);
-		z-index: 100;
-	}
-
 }
