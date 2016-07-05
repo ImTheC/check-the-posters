@@ -30,7 +30,17 @@ var standardTime = function(time){
 	return timeValue;
 };
 
-var formatDate = function(oldDate) {
+var dateDisplay = function(oldDate){   // change date to typical U.S. display format
+	oldDate = (new Date(oldDate)).toString().split(" ");
+
+	var month = oldDate[1];
+	var day = Number(oldDate[2]);
+	var year = Number(oldDate[3]);
+
+	return month + " " + day + ", " + year;
+};
+
+var formatDate = function(oldDate) {  // change to correct date format for time value input, like on edit page
 	var newDate = oldDate.split(" ");
 	if ( newDate.length > 1 ) {
 		// Turn Month Abbreviation Into Number
@@ -64,7 +74,7 @@ router.route('/')
 		req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
 		req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
 		req.body.poster.user_id = req.user.id;
-		req.body.poster.date = formatDate(req.body.poster.date);
+		req.body.poster.date = dateDisplay(req.body.poster.date);
 
 		knex("posters").insert(req.body.poster, "id").then(function(id){
 			res.redirect("/posters/" + id);
@@ -123,6 +133,7 @@ router.get('/:poster_id', function (req, res) {
 		Posters().where("id", req.params.poster_id).first().then(function(poster){
 			poster.start_time = standardTime(poster.start_time); // change military time to standard
 			poster.end_time = standardTime(poster.end_time);
+			poster.date = dateDisplay(poster.date); // change date to typical U.S. display format
 
 			if ( req.user && req.user.id === poster.user_id ) {   // Check if authorized
 				authorized = true;
