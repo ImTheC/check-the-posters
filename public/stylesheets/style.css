@@ -77,6 +77,10 @@ Accent:
 	margin-left: 10px;
 }
 
+.bump-down {
+	margin-top: 15px;
+}
+
 .poster {
 	width: 400px;
 	height: auto;
