@@ -1,22 +1,57 @@
 include ../partials/header
 include ../partials/nav
 
-
 .wrapper
+	h3#thisWeek This Week:
 	.columns
 		each poster in posters
-			.pin
-				.card
-					.card-image
-						a(href="/posters/" + poster.id): img(src=poster.imgurl)
-					.card-action#heart
-						a(href="#"): span.card-title.red-text &#10084;
-						span#hearts-total= " " + poster.hearts
-						span.hide#id #{poster.id}
-						if poster.starting < today && poster.ending > today
-							span.indent.center.red-text HAPPENING NOW!
-.section
-
+			if poster.starting < endOfThisWeek
+				.pin
+					.card
+						.card-image
+							a(href="/posters/" + poster.id): img(src=poster.imgurl)
+						.card-action#heart
+							a(href="#"): span.card-title.red-text &#10084;
+							span#hearts-total= " " + poster.hearts
+							span.hide#id #{poster.id}
+							if poster.starting < today && poster.ending > today
+								span.indent.center.red-text HAPPENING NOW!
+.wrapper
+	a(href="#"): p.center.flow-text Back To Top
+.wrapper
+	h3#nextWeek Next Week:
+	.columns
+		each poster in posters
+			if poster.starting > endOfThisWeek && poster.starting < endOfNextWeek
+				.pin
+					.card
+						.card-image
+							a(href="/posters/" + poster.id): img(src=poster.imgurl)
+						.card-action#heart
+							a(href="#"): span.card-title.red-text &#10084;
+							span#hearts-total= " " + poster.hearts
+							span.hide#id #{poster.id}
+							if poster.starting < today && poster.ending > today
+								span.indent.center.red-text HAPPENING NOW!
+.wrapper
+	a(href="#"): p.center.flow-text Back To Top
+	.wrapper
+		h3#future Future:
+		.columns
+			each poster in posters
+				if poster.starting > endOfNextWeek
+					.pin
+						.card
+							.card-image
+								a(href="/posters/" + poster.id): img(src=poster.imgurl)
+							.card-action#heart
+								a(href="#"): span.card-title.red-text &#10084;
+								span#hearts-total= " " + poster.hearts
+								span.hide#id #{poster.id}
+								if poster.starting < today && poster.ending > today
+									span.indent.center.red-text HAPPENING NOW!
+.wrapper
+	a(href="#"): p.center.flow-text Back To Top
 
 include ../partials/materializeScript
 script(type="text/javascript" src="/javascripts/index.js")

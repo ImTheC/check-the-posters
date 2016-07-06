@@ -66,7 +66,7 @@ Accent:
 
 /* Change the link color to #111 (black) on hover */
 .subnav li a:hover {
-    background-color: #37474f;
+    background-color: #455a64;
 }
 
 .bold {
@@ -75,6 +75,10 @@ Accent:
 
 .indent {
 	margin-left: 10px;
+}
+
+.bump-down {
+	margin-top: 15px;
 }
 
 .poster {
