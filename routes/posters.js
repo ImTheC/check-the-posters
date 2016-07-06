@@ -56,7 +56,6 @@ var formatDate = function(oldDate) {  // change to correct date format for time 
 	}
 };
 
-
 /* GET All POSTERS.
 					&
 	ADD NEW POSTERS. */
@@ -64,10 +63,23 @@ router.route('/')
 
 	.get(function (req, res) {
 		var today = new Date();
-			Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
-				// res.render('post', {title: "Maps!"});
-				res.render('posters/index', {title: "Poster Pole Front Page", posters:posters, today: today});
-			});
+		var endOfThisWeek = new Date();
+		var endOfNextWeek = new Date();
+		endOfThisWeek.setHours(0,0,0,0);
+		endOfNextWeek.setHours(0,0,0,0);
+
+		var i = 0;
+
+		do {   // Find next Monday
+			i++;
+			endOfThisWeek.setDate(today.getDate()+i);
+		} while (endOfThisWeek.toString().split(" ")[0] != "Mon");
+
+		endOfNextWeek.setDate(endOfThisWeek.getDate()+7);  // A week from next Monday
+
+		Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
+			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters, today: today, endOfThisWeek: endOfThisWeek, endOfNextWeek: endOfNextWeek});
+		});
 	})
 
 	.post(function(req, res){
