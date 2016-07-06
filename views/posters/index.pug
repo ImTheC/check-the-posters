@@ -1,9 +1,9 @@
 include ../partials/header
 include ../partials/nav
 
-if thisWeeksPosters.length > 0
-	.wrapper
-		h3#thisWeek This Week:
+.wrapper
+	h3#thisWeek This Week:
+		if thisWeeksPosters.length > 0
 		.columns
 			each poster in thisWeeksPosters
 				.pin
@@ -19,11 +19,11 @@ if thisWeeksPosters.length > 0
 	.wrapper
 		a(href="#"): p.center.flow-text Back To Top
 else
-	h3 No posters for This Week! :(
+	h5 No posters to show! :(
 
-if nextWeeksPosters.length > 0
-	.wrapper
-		h3#nextWeek Next Week:
+.wrapper
+	h3#nextWeek Next Week:
+		if nextWeeksPosters.length > 0
 		.columns
 			each poster in nextWeeksPosters
 				.pin
@@ -37,11 +37,11 @@ if nextWeeksPosters.length > 0
 	.wrapper
 		a(href="#"): p.center.flow-text Back To Top
 else
-	h3 No posters for Next Week! :(
+	h5 No posters to show! :(
 
-if futurePosters.length > 0
-	.wrapper
-		h3#future Future:
+.wrapper
+	h3#future Future:
+		if futurePosters.length > 0
 		.columns
 			each poster in futurePosters
 				.pin
