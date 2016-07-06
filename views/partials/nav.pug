@@ -2,9 +2,9 @@ header
 	nav.color-primary
 		div.nav-wrapper
 			a(href="/"): img.left(src="/images/logo.png")
-			a(href="/"): img.left.responsive-img.bump-down.hide-on-small-only(src="/images/ctplogo37.png")
-			a(href="/"): img.left.responsive-img.bump-down.hide-on-med-and-up(src="/images/ctplogo25.png")
-			a.right.button-collapse.hide-on-med-and-up(href='#', data-activates='mobile-menu', class="button-collapse")
+			a(href="/"): img.left.responsive-img.bump-down.hide-on-small-only(src="/images/ctplogo25.png")
+			a(href="/"): img.left.responsive-img.bump-down.hide-on-med-and-up(src="/images/ctplogo15.png")
+			a.right.button-collapse.hide-on-med-and-up(href='#', data-activates='mobile-menu')
 				i.material-icons menu
 
 			if currentUser
@@ -30,13 +30,3 @@ header
 					ul#mobile-menu.side-nav
 						li: a(href="/auth/signup") Signup
 						li: a(href="/auth/login") Login
-
-	.subnav
-		.nav-wrapper.color-primary2
-			ul
-				li
-					a.text-accent(href='/posters/#thisWeek') This Week
-				li
-					a.text-accent(href='/posters/#nextWeek') Next Week
-				li
-					a.text-accent(href='/posters/#future') Future

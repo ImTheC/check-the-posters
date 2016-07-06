@@ -78,7 +78,7 @@ Accent:
 }
 
 .bump-down {
-	margin-top: 15px;
+	margin-top: 20px;
 }
 
 .poster {
@@ -136,5 +136,17 @@ header img {
 		-webkit-column-count: 3;
 		-moz-column-count: 3;
 		column-count: 3;
+	}
+}
+
+@media (max-width: 380px) {
+	.hide-on-xs {
+		display: none;
+	}
+}
+
+@media (min-width: 379px) {
+	.show-on-xs {
+		display: none;
 	}
 }
