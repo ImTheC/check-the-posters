@@ -78,7 +78,20 @@ router.route('/')
 		endOfNextWeek.setDate(endOfThisWeek.getDate()+7);  // A week from next Monday
 
 		Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
-			res.render('posters/index', {title: "Poster Pole Front Page", posters:posters, today: today, endOfThisWeek: endOfThisWeek, endOfNextWeek: endOfNextWeek});
+			var thisWeeksPosters = [];
+			var nextWeeksPosters = [];
+			var futurePosters = [];
+
+			for ( var i = 0; i < posters.length; i++ ) {  // Sort posters by this week, next week, and beyond
+				if ( posters[i].starting < endOfThisWeek ) {
+					thisWeeksPosters.push(posters[i]);
+				} else if ( posters[i].starting > endOfThisWeek && posters[i].starting < endOfNextWeek ) {
+					nextWeeksPosters.push(posters[i]);
+				} else {
+					futurePosters.push(posters[i]);
+				}
+			}
+			res.render('posters/index', {title: "Poster Pole Front Page", thisWeeksPosters: thisWeeksPosters, nextWeeksPosters: nextWeeksPosters, futurePosters: futurePosters, today: today});
 		});
 	})
 

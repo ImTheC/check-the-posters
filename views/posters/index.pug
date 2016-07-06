@@ -1,11 +1,11 @@
 include ../partials/header
 include ../partials/nav
 
-.wrapper
-	h3#thisWeek This Week:
-	.columns
-		each poster in posters
-			if poster.starting < endOfThisWeek
+if thisWeeksPosters.length > 0
+	.wrapper
+		h3#thisWeek This Week:
+		.columns
+			each poster in thisWeeksPosters
 				.pin
 					.card
 						.card-image
@@ -16,13 +16,16 @@ include ../partials/nav
 							span.hide#id #{poster.id}
 							if poster.starting < today && poster.ending > today
 								span.indent.center.red-text HAPPENING NOW!
-.wrapper
-	a(href="#"): p.center.flow-text Back To Top
-.wrapper
-	h3#nextWeek Next Week:
-	.columns
-		each poster in posters
-			if poster.starting > endOfThisWeek && poster.starting < endOfNextWeek
+	.wrapper
+		a(href="#"): p.center.flow-text Back To Top
+else
+	h3 No posters for This Week! :(
+
+if nextWeeksPosters.length > 0
+	.wrapper
+		h3#nextWeek Next Week:
+		.columns
+			each poster in nextWeeksPosters
 				.pin
 					.card
 						.card-image
@@ -31,27 +34,28 @@ include ../partials/nav
 							a(href="#"): span.card-title.red-text &#10084;
 							span#hearts-total= " " + poster.hearts
 							span.hide#id #{poster.id}
-							if poster.starting < today && poster.ending > today
-								span.indent.center.red-text HAPPENING NOW!
-.wrapper
-	a(href="#"): p.center.flow-text Back To Top
+	.wrapper
+		a(href="#"): p.center.flow-text Back To Top
+else
+	h3 No posters for Next Week! :(
+
+if futurePosters.length > 0
 	.wrapper
 		h3#future Future:
 		.columns
-			each poster in posters
-				if poster.starting > endOfNextWeek
-					.pin
-						.card
-							.card-image
-								a(href="/posters/" + poster.id): img(src=poster.imgurl)
-							.card-action#heart
-								a(href="#"): span.card-title.red-text &#10084;
-								span#hearts-total= " " + poster.hearts
-								span.hide#id #{poster.id}
-								if poster.starting < today && poster.ending > today
-									span.indent.center.red-text HAPPENING NOW!
-.wrapper
-	a(href="#"): p.center.flow-text Back To Top
+			each poster in futurePosters
+				.pin
+					.card
+						.card-image
+							a(href="/posters/" + poster.id): img(src=poster.imgurl)
+						.card-action#heart
+							a(href="#"): span.card-title.red-text &#10084;
+							span#hearts-total= " " + poster.hearts
+							span.hide#id #{poster.id}
+	.wrapper
+		a(href="#"): p.center.flow-text Back To Top
+else
+	h3 No posters for the future yet! Find some events and add their posters! :(
 
 include ../partials/materializeScript
 script(type="text/javascript" src="/javascripts/index.js")
