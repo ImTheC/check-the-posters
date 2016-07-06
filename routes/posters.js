@@ -77,21 +77,47 @@ router.route('/')
 
 		endOfNextWeek.setDate(endOfThisWeek.getDate()+7);  // A week from next Monday
 
-		Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
+		Posters().orderBy('starting', 'asc').then(function(posters){
 			var thisWeeksPosters = [];
 			var nextWeeksPosters = [];
 			var futurePosters = [];
+			var thisWeeksDemo = false;
+			var nextWeeksDemo = false;
+			var futureWeeksDemo = false;
 
 			for ( var i = 0; i < posters.length; i++ ) {  // Sort posters by this week, next week, and beyond
-				if ( posters[i].starting < endOfThisWeek ) {
+				if ( posters[i].ending > today && posters[i].starting < endOfThisWeek ) {
 					thisWeeksPosters.push(posters[i]);
 				} else if ( posters[i].starting > endOfThisWeek && posters[i].starting < endOfNextWeek ) {
 					nextWeeksPosters.push(posters[i]);
-				} else {
+				} else if ( posters[i].starting > endOfNextWeek){
 					futurePosters.push(posters[i]);
 				}
 			}
-			res.render('posters/index', {title: "Poster Pole Front Page", thisWeeksPosters: thisWeeksPosters, nextWeeksPosters: nextWeeksPosters, futurePosters: futurePosters, today: today});
+
+			if ( thisWeeksPosters.length === 0 ) {  // if no posters add in examples
+				thisWeeksDemo = true;
+				for ( var j = 0; j < 4; j++ ) {
+					thisWeeksPosters.push(posters[j]);
+				}
+			}
+
+			if ( nextWeeksPosters.length === 0 ) {  // if no posters add in examples
+				nextWeeksDemo = true;
+				for ( var k = 4; k < 6; k++ ) {
+					thisWeeksPosters.push(posters[k]);
+				}
+			}
+
+			if ( futurePosters.length === 0 ) {  // if no posters add in examples
+				futureWeeksDemo = true;
+				for ( var l = 6; l < 8; l++ ) {
+					futurePosters.push(posters[l]);
+				}
+			}
+
+
+			res.render('posters/index', {title: "Poster Pole Front Page", thisWeeksPosters: thisWeeksPosters, nextWeeksPosters: nextWeeksPosters, futurePosters: futurePosters, today: today, thisWeeksDemo: thisWeeksDemo, nextWeeksDemo: nextWeeksDemo, futureWeeksDemo: futureWeeksDemo});
 		});
 	})
 
