@@ -6,9 +6,14 @@ header
 			a(href="/"): img.left.responsive-img.bump-down.hide-on-med-and-up(src="/images/ctplogo15.png")
 			a.right.button-collapse.hide-on-med-and-up(href='#', data-activates='mobile-menu')
 				i.material-icons menu
-
 			if currentUser
 				ul.right.hide-on-small-only
+					li: a(href="/posters/new") New Poster
+					li: a(href="/users/" + currentUser.id) Account
+					li: a(href="/auth/logout") Logout
+					if currentUser.isadmin === true
+						li: a(href="/users") Admin
+				ul#mobile-menu.side-nav
 					li: a(href="/posters/new") New Poster
 					li: a(href="/users/" + currentUser.id) Account
 					li: a(href="/auth/logout") Logout
@@ -18,15 +23,6 @@ header
 				ul.right.hide-on-small-only
 					li: a(href="/auth/signup") Signup
 					li: a(href="/auth/login") Login
-
-				if currentUser
-					ul#mobile-menu.side-nav
-						li: a(href="/posters/new") New Poster
-						li: a(href="/users/" + currentUser.id) Account
-						li: a(href="/auth/logout") Logout
-						if currentUser.isadmin === true
-							li: a(href="/users") Admin
-				else
-					ul#mobile-menu.side-nav
-						li: a(href="/auth/signup") Signup
-						li: a(href="/auth/login") Login
+				ul#mobile-menu.side-nav
+					li: a(href="/auth/signup") Signup
+					li: a(href="/auth/login") Login
