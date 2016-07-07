@@ -61,7 +61,7 @@ var formatDate = function(oldDate) {  // change to correct date format for time 
 	ADD NEW POSTERS. */
 router.route('/')
 
-	.get(function (req, res) {
+	.get(function (req, res) {   // ##### GET All POSTERS #####
 		var today = new Date();
 		var endOfThisWeek = new Date();
 		var endOfNextWeek = new Date();
@@ -120,7 +120,17 @@ router.route('/')
 		});
 	})
 
-	.post(function(req, res){
+	.post(function(req, res){  // ##### ADD NEW POSTERS #####
+		if ( req.body.start_AMPM === "PM" ) {
+			req.body.poster.start_time = (parseInt(req.body.start_hour) + 12).toString() + ":" + req.body.start_minute + ":00";
+		} else {
+			req.body.poster.start_time = req.body.start_hour + ":" + req.body.start_minute + ":00";
+		}
+		if ( req.body.end_AMPM === "PM" ) {
+			req.body.poster.end_time = (parseInt(req.body.end_hour) + 12).toString() + ":" + req.body.end_minute + ":00";
+		} else {
+			req.body.poster.end_time = req.body.end_hour + ":" + req.body.end_minute + ":00";
+		}
 		req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
 		req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
 		req.body.poster.user_id = req.user.id;
