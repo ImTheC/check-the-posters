@@ -116,8 +116,7 @@ router.route('/')
 				}
 			}
 
-
-			res.render('posters/index', {title: "Poster Pole Front Page", thisWeeksPosters: thisWeeksPosters, nextWeeksPosters: nextWeeksPosters, futurePosters: futurePosters, today: today, thisWeeksDemo: thisWeeksDemo, nextWeeksDemo: nextWeeksDemo, futureWeeksDemo: futureWeeksDemo});
+			res.render('posters/index', {title: "Poster Pole Front Page", thisWeeksPosters: thisWeeksPosters, nextWeeksPosters: nextWeeksPosters, futurePosters: futurePosters, today: today, thisWeeksDemo: thisWeeksDemo, nextWeeksDemo: nextWeeksDemo, futureWeeksDemo: futureWeeksDemo, user: req.user});
 		});
 	})
 

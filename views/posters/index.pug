@@ -12,7 +12,10 @@ include ../partials/subnav
 							.card-image
 								a(href="/posters/" + poster.id): img(src=poster.imgurl)
 							.card-action#heart
-								a(href="#"): span.card-title.red-text.flow-text &#10084;
+								unless user
+									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Login to heart!'): span.card-title.red-text.flow-text &#10084;
+								else
+									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Click to heart!'): span.card-title.red-text.flow-text &#10084;
 								span#hearts-total.flow-text= " " + poster.hearts
 								span.hide#id #{poster.id}
 								if poster.starting < today && poster.ending > today
@@ -34,7 +37,10 @@ include ../partials/subnav
 							.card-image
 								a(href="/posters/" + poster.id): img(src=poster.imgurl)
 							.card-action#heart
-								a(href="#"): span.card-title.red-text.flow-text &#10084;
+								unless user
+									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Login to heart!'): span.card-title.red-text.flow-text &#10084;
+								else
+									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Click to heart!'): span.card-title.red-text.flow-text &#10084;
 								span#hearts-total.flow-text= " " + poster.hearts
 								span.hide#id #{poster.id}
 								if nextWeeksDemo
@@ -54,7 +60,10 @@ include ../partials/subnav
 							.card-image
 								a(href="/posters/" + poster.id): img(src=poster.imgurl)
 							.card-action#heart
-								a(href="#"): span.card-title.red-text.flow-text &#10084;
+								unless user
+									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Login to heart!'): span.card-title.red-text.flow-text &#10084;
+								else
+									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Click to heart!'): span.card-title.red-text.flow-text &#10084;
 								span#hearts-total.flow-text= " " + poster.hearts
 								span.hide#id #{poster.id}
 								if futureWeeksDemo
