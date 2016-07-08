@@ -4,8 +4,6 @@ var knex = require('../db/knex');
 var authHelpers = require('../auth/authHelpers');
 var passwordHelpers = require('../auth/passwordHelpers');
 
-require('locus');
-
 // Users function
 function Users() {
   return knex('users');
