@@ -21,8 +21,8 @@ router.use(authHelpers.checkAuthentication);
 /* Index, get all users. */
 router.get('/', authHelpers.ensureAdmin, (req, res, next) => {
   Users().then((users) => {
-    res.render('users/index', {title: 'All Users', users: users})
-  })
+    res.render('users/index', {title: 'All Users', users: users});
+  });
 });
 
 
@@ -39,27 +39,27 @@ router.get('/:id', authHelpers.ensureCorrectUser, (req, res) => {
 router.get('/:id/edit', authHelpers.ensureCorrectUser, (req, res) => {
   Users().where('id', req.params.id).first().then((user) => {
     res.render('users/edit', {title: 'Edit User', user: user});
-  })
-})
+  });
+});
 
 router.put('/:id', authHelpers.ensureCorrectUser, (req, res) => {
   passwordHelpers.editUser(req).then((user) => {
     res.redirect('/users/' + req.params.id);
   }).catch((err)=> {
     if (err.constraint === 'users_username_unique') {
-      err.message = "Username is already taken."
+      err.message = "Username is already taken.";
     }
-    req.flash('loginMessage', err.message)
+    req.flash('loginMessage', err.message);
     res.redirect(`/users/${req.user.id}/edit`);
-  })
-})
+  });
+});
 
 // Delete a user
 router.delete('/:id', authHelpers.ensureCorrectUser, (req, res) => {
   Users().where('id', req.params.id).del().then((user) => {
     req.logout();
     res.redirect('/');
-  })
-})
+  });
+});
 
 module.exports = router;
