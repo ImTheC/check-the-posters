@@ -46,6 +46,21 @@ Accent:
 	color: #ff6e40;
 }
 
+.alert {
+	color: red;
+}
+
+.error {
+	position: absolute;
+	background-image: url("/images/poster-trash-404.png");
+	height: 100%;
+	width: 100%;
+}
+
+.border {
+	border: 1px solid black;
+}
+
 .subnav ul {
     list-style-type: none;
     margin: 0;
