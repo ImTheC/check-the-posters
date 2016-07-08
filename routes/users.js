@@ -25,16 +25,6 @@ router.get('/', authHelpers.ensureAdmin, (req, res, next) => {
   })
 });
 
-// Create User, authentication route handle this now
-// router.get('/new', (req, res) => {
-//   res.render('users/new', {title: 'Create User'});
-// })
-//
-// router.post('/', (req, res) => {
-//   Users().insert(req.body.user).then((user) => {
-//     res.redirect('/');
-//   })
-// })
 
 // Read a single user
 router.get('/:id', authHelpers.ensureCorrectUser, (req, res) => {
@@ -62,9 +52,6 @@ router.put('/:id', authHelpers.ensureCorrectUser, (req, res) => {
     req.flash('loginMessage', err.message)
     res.redirect(`/users/${req.user.id}/edit`);
   })
-  // Users().where('id', req.params.id).update(req.body.user).then((user) => {
-  //   res.redirect('/');
-  // })
 })
 
 // Delete a user
