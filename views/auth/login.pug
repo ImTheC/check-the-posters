@@ -1,26 +1,30 @@
 include ../partials/header.pug
 include ../partials/nav.pug
 
-block content
-	div.container
-		if(message.length)
-			div.alert=message
-		h1 Login
-		div.row
-			.col.s12
-				form(action="/auth/login", method="POST")
-					div.input-field
-						input(id="username" type="text" name="user[username]")
-						label(for="username") Username
-					div.input-field
-						input(id="password" type="password" name="user[password]")
-						label(for="password") Password
-					div.row
-						input(class="btn btn-primary" type="submit" value="Login")
-				br
-				a(href="/auth/twitter"): img(src="/images/sign-in-with-twitter-link.png")
-				br
-				br
-				a(href="/auth/signup") Create New Account
+.section
+.container
+	.row
+		.col.s12
+			if(message.length)
+				div.alert=message
+	.row
+		.col.s12
+			h1 Login
+	.row
+		.col.s12
+			form(action="/auth/login", method="POST")
+				div.input-field
+					input(id="username" type="text" name="user[username]")
+					label(for="username") Username
+				div.input-field
+					input(id="password" type="password" name="user[password]")
+					label(for="password") Password
+				div.row
+					input(class="btn btn-primary" type="submit" value="Login")
+			br
+			a(href="/auth/twitter"): img(src="/images/sign-in-with-twitter-link.png")
+			br
+			br
+			a(href="/auth/signup") Create New Account
 
 include ../partials/materializeScript.pug

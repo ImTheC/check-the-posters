@@ -7,7 +7,7 @@ const handleErrors = (req) => {
     if(req.body.user.username.length < 6) {
       reject({
         err:'username_length',
-        message:'Username is an email'
+        message:'Username must be at least 6 characters.'
       });
     }
 		else if (req.body.user.password.length === 0) {
@@ -16,25 +16,25 @@ const handleErrors = (req) => {
     else if(req.body.user.password.length < 6) {
       reject({
         err:'password_length',
-        message:'Password must be longer than 6 characters'
+        message:'Password must be at least 6 characters.'
       });
     }
     else {
       resolve();
     }
-  })
-}
+  });
+};
 
 exports.createUser =(req)=> {
     return handleErrors(req).then(() => {
-      const salt = bcrypt.genSaltSync()
+      const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync(req.body.user.password, salt);
       return knex('users').insert({
         name: req.body.user.name,
         username: req.body.user.username,
         password:hash,
-      }, "*")
-    })
+      }, "*");
+    });
 },
 
 exports.editUser =(req)=> {
@@ -53,7 +53,7 @@ exports.editUser =(req)=> {
 	        password:hash,
       	}, "*");
 			}
-    })
+    });
 },
 
 exports.comparePass = (userpass, dbpass) => bcrypt.compareSync(userpass, dbpass);

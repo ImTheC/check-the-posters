@@ -46,6 +46,10 @@ Accent:
 	color: #ff6e40;
 }
 
+.alert {
+	color: red;
+}
+
 .subnav ul {
     list-style-type: none;
     margin: 0;

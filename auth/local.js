@@ -10,18 +10,15 @@ passport.use(new LocalStrategy({
   usernameField: 'user[username]',
   passwordField: 'user[password]',
   passReqToCallback : true
-},(req, username, password, done) =>{
+},(req, username, password, done) => {
     knex('users').where({ username }).first().then((user) =>{
-      if (!user) {
-        return done(null, false, req.flash('loginMessage','Wrong credentials'));
-      }
-      if (!passwordHelpers.comparePass(password, user.password)) {
-        return done(null, false, req.flash('loginMessage', 'Wrong credentials'));
+      if (!user || !passwordHelpers.comparePass(password, user.password)) {
+        return done(null, false, req.flash('loginMessage','Password or username invalid!'));
       }
       return done(null, user);
     }).catch((err) => {
-      return done(err)
-    })
+      return done(err);
+    });
   }
 ));
 

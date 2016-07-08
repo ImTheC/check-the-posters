@@ -3,7 +3,7 @@ const authMiddleware = {
   checkAuthentication(req, res, next) {
     // can use req.isAuthenticated() for this too..
     if (!req.user) {
-      req.flash('loginMessage', "Please login")
+      req.flash('loginMessage', "Please login.")
       return res.redirect('/auth/login');
     }
     else {
