@@ -19,10 +19,42 @@ include ../partials/nav
 				.input-field.col.s6.validate
 					label(for='start_time') Ending At:
 			.row
-				.input-field.col.s6
-					input#start_time.validate.timepicker(type='time' name="poster[start_time]" required)
-				.input-field.col.s6
-					input#end_time.validate.timepicker(type='time' name="poster[end_time]" required)
+				.input-field.col.s1
+					select#start_hour.validate(name="start_hour" required)
+						option(value='', disabled='', selected='') Hour:
+						-for (var i = 1; i <= 12; i++)
+							option(value=i)= i
+				.input-field.col.s2
+					select#start_minute.validate(name="start_minute" required)
+						option(value='', disabled='', selected='') Minute:
+						-for (var i = 0; i < 60; i = i + 5)
+							if i < 6
+								option(value="0" + i)= "0" + i
+							else
+								option(value=i)= i
+				.input-field.col.s2
+					select#start_AMPM.validate(name="start_AMPM" required)
+						option(value='', disabled='', selected='') AM\PM:
+						option(value="AM") AM
+						option(value="PM") PM
+				.input-field.col.s1.offset-s1
+					select#end_hour.validate(name="end_hour" required)
+						option(value='', disabled='', selected='') Hour:
+						-for (var i = 1; i <= 12; i++)
+							option(value=i)= i
+				.input-field.col.s2
+					select#end_minute.validate(name="end_minute" required)
+						option(value='', disabled='', selected='') Minute:
+						-for (var i = 0; i < 60; i = i + 5)
+							if i < 6
+								option(value="0" + i)= "0" + i
+							else
+								option(value=i)= i
+				.input-field.col.s2
+					select#end_AMPM.validate(name="end_AMPM" required)
+						option(value='', disabled='', selected='') AM\PM:
+						option(value="AM") AM
+						option(value="PM") PM
 			.row
 				.input-field.col.s12
 					input#address.validate(type='text' name="poster[address]" required)
@@ -46,11 +78,18 @@ include ../partials/nav
 					input#imgurl.validate(type='url' name="poster[imgurl]" required)
 					label(for='imgurl') Image Url:
 			.row
-				.input-field.col.s12
+				.input-field.col.s6
 					button.btn.waves-effect.waves-light(type='submit')
 						| Add New Poster
 						i.material-icons.right note_add
+				.col.s6.card
+					.card-content
+						h5.text-primary Image Preview:
+					.card-image#posterImageGoesHere
+					.section
 
+.section
 
 include ../partials/materializeScript
 script(type="text/javascript" src="/javascripts/poster_initialize.js")
+script(type="text/javascript" src="/javascripts/preview.js")

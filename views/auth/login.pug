@@ -1,12 +1,17 @@
 include ../partials/header.pug
 include ../partials/nav.pug
 
-block content
-	div.container
-		if(message.length)
-			div.alert=message
-		h1 Login
-		div.row
+.section
+.container
+	.row
+		.col.s12
+			if(message.length)
+				div.alert=message
+	.row
+		.col.s12
+			h1 Login
+	.row
+		.col.s12
 			form(action="/auth/login", method="POST")
 				div.input-field
 					input(id="username" type="text" name="user[username]")

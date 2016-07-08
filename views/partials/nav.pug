@@ -1,24 +1,28 @@
 header
 	nav.color-primary
 		div.nav-wrapper
-			a.brand-logo.left(href="/")
-				img(src="#")
-				| Postr
+			a(href="/"): img.left(src="/images/logo.png")
+			a(href="/"): img.left.responsive-img.bump-down.hide-on-small-only(src="/images/ctplogo25.png")
+			a(href="/"): img.left.responsive-img.bump-down.hide-on-med-and-up(src="/images/ctplogo15.png")
+			a.right.button-collapse.hide-on-med-and-up(href='#', data-activates='mobile-menu')
+				i.material-icons menu
 			if currentUser
-				ul.right
+				ul.right.hide-on-small-only
 					li: a(href="/posters/new") New Poster
 					li: a(href="/users/" + currentUser.id) Account
 					li: a(href="/auth/logout") Logout
+					if currentUser.isadmin === true
+						li: a(href="/users") Admin
+				ul#mobile-menu.side-nav
+					li: a(href="/posters/new") New Poster
+					li: a(href="/users/" + currentUser.id) Account
+					li: a(href="/auth/logout") Logout
+					if currentUser.isadmin === true
+						li: a(href="/users") Admin
 			else
-				ul.right
+				ul.right.hide-on-small-only
 					li: a(href="/auth/signup") Signup
 					li: a(href="/auth/login") Login
-	//- .subnav    // Add category if also
-	//- 	.nav-wrapper.color-primary1
-	//- 		ul
-	//- 			li
-	//- 				a.text-accent(href='#') Cat1
-	//- 			li
-	//- 				a.text-accent(href='#') Cat2
-	//- 			li
-	//- 				a.text-accent(href='#') Cat3
+				ul#mobile-menu.side-nav
+					li: a(href="/auth/signup") Signup
+					li: a(href="/auth/login") Login

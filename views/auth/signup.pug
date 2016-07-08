@@ -1,28 +1,31 @@
 include ../partials/header.pug
 include ../partials/nav.pug
 
-block content
-  div.container
-    if(message.length)
-      div.alert=message
-    h1 Signup
-    div.row
-      a.btn.btn-primary(href="/auth/twitter") Continue with Twitter
+.section
+.container
+	.row
+		.col.s12
+			if(message.length)
+				div.alert=message
+			h1 Signup
+	.row
+		.col.s12
+			a(href="/auth/twitter"): img(src="/images/sign-in-with-twitter-link.png")
 
-    span Or sign up an account
+		span Or sign up an account
 
-    form(action="/auth/signup", method="POST")
-      div.input-field
-        input(id="name" type="text" name="user[name]")
-        label(for="name") Name
-      div.input-field
-        input(id="username" type="email" name="user[username]")
-        label(for="username") Email
-      div.input-field
-        input(id="password" type="password" name="user[password]")
-        label(for="password") Password
-      div.row
-        input(class="btn btn-primary" type="submit" value="Sign Up")
-      a(href="/auth/login") Already have an account? Login here
+		form(action="/auth/signup", method="POST")
+			div.input-field
+				input(id="name" type="text" name="user[name]")
+				label(for="name") Name
+			div.input-field
+				input(id="username" type="email" name="user[username]")
+				label(for="username") Email
+			div.input-field
+				input(id="password" type="password" name="user[password]")
+				label(for="password") Password
+			div.row
+				input(class="btn btn-primary" type="submit" value="Sign Up")
+			a(href="/auth/login") Already have an account? Login here
 
 include ../partials/materializeScript.pug

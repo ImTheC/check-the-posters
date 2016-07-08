@@ -1,9 +1,21 @@
 include ./partials/header.pug
 include ./partials/nav.pug
 
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+.error
+	.container
+		.row
+			.section
+			.col.s6.offset-s6.errorPoster.card.z-depth-5
+				.card-content
+					h2 Whoops!!
+					h3.center= message + " - " + error.status
+				.card-action.center
+					a.waves-effect.waves-light.btn(href="/")
+						i.material-icons.left loop
+						| Check the Posters
+
+			.section
+			.col.s12
+				pre #{error.stack}
 
 include ./partials/materializeScript.pug

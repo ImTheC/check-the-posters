@@ -30,7 +30,17 @@ var standardTime = function(time){
 	return timeValue;
 };
 
-var formatDate = function(oldDate) {
+var dateDisplay = function(oldDate){   // change date to typical U.S. display format
+	oldDate = (new Date(oldDate)).toString().split(" ");
+
+	var month = oldDate[1];
+	var day = Number(oldDate[2]);
+	var year = Number(oldDate[3]);
+
+	return month + " " + day + ", " + year;
+};
+
+var formatDate = function(oldDate) {  // change to correct date format for time value input, like on edit page
 	var newDate = oldDate.split(" ");
 	if ( newDate.length > 1 ) {
 		// Turn Month Abbreviation Into Number
@@ -46,25 +56,85 @@ var formatDate = function(oldDate) {
 	}
 };
 
-
 /* GET All POSTERS.
 					&
 	ADD NEW POSTERS. */
 router.route('/')
 
-	.get(function (req, res) {
+	.get(function (req, res) {   // ##### GET All POSTERS #####
 		var today = new Date();
-			Posters().where('ending', '>', today).orderBy('starting', 'asc').then(function(posters){
-				// res.render('post', {title: "Maps!"});
-				res.render('posters/index', {title: "Poster Pole Front Page", posters:posters, today: today});
-			});
+		var endOfThisWeek = new Date();
+		var endOfNextWeek = new Date();
+		endOfThisWeek.setHours(0,0,0,0);
+		endOfNextWeek.setHours(0,0,0,0);
+
+		var i = 0;
+
+		do {   // Find next Monday
+			i++;
+			endOfThisWeek.setDate(today.getDate()+i);
+		} while (endOfThisWeek.toString().split(" ")[0] != "Mon");
+
+		endOfNextWeek.setDate(endOfThisWeek.getDate()+7);  // A week from next Monday
+
+		Posters().orderBy('starting', 'asc').then(function(posters){
+			var thisWeeksPosters = [];
+			var nextWeeksPosters = [];
+			var futurePosters = [];
+			var thisWeeksDemo = false;
+			var nextWeeksDemo = false;
+			var futureWeeksDemo = false;
+
+			for ( var i = 0; i < posters.length; i++ ) {  // Sort posters by this week, next week, and beyond
+				if ( posters[i].ending > today && posters[i].starting < endOfThisWeek ) {
+					thisWeeksPosters.push(posters[i]);
+				} else if ( posters[i].starting > endOfThisWeek && posters[i].starting < endOfNextWeek ) {
+					nextWeeksPosters.push(posters[i]);
+				} else if ( posters[i].starting > endOfNextWeek){
+					futurePosters.push(posters[i]);
+				}
+			}
+
+			if ( thisWeeksPosters.length === 0 ) {  // if no posters add in examples
+				thisWeeksDemo = true;
+				for ( var j = 0; j < 4; j++ ) {
+					thisWeeksPosters.push(posters[j]);
+				}
+			}
+
+			if ( nextWeeksPosters.length === 0 ) {  // if no posters add in examples
+				nextWeeksDemo = true;
+				for ( var k = 4; k < 6; k++ ) {
+					thisWeeksPosters.push(posters[k]);
+				}
+			}
+
+			if ( futurePosters.length === 0 ) {  // if no posters add in examples
+				futureWeeksDemo = true;
+				for ( var l = 6; l < 8; l++ ) {
+					futurePosters.push(posters[l]);
+				}
+			}
+
+			res.render('posters/index', {title: "Poster Pole Front Page", thisWeeksPosters: thisWeeksPosters, nextWeeksPosters: nextWeeksPosters, futurePosters: futurePosters, today: today, thisWeeksDemo: thisWeeksDemo, nextWeeksDemo: nextWeeksDemo, futureWeeksDemo: futureWeeksDemo, user: req.user});
+		});
 	})
 
-	.post(function(req, res){
+	.post(function(req, res){  // ##### ADD NEW POSTERS #####
+		if ( req.body.start_AMPM === "PM" ) {
+			req.body.poster.start_time = (parseInt(req.body.start_hour) + 12).toString() + ":" + req.body.start_minute + ":00";
+		} else {
+			req.body.poster.start_time = req.body.start_hour + ":" + req.body.start_minute + ":00";
+		}
+		if ( req.body.end_AMPM === "PM" ) {
+			req.body.poster.end_time = (parseInt(req.body.end_hour) + 12).toString() + ":" + req.body.end_minute + ":00";
+		} else {
+			req.body.poster.end_time = req.body.end_hour + ":" + req.body.end_minute + ":00";
+		}
 		req.body.poster.starting = req.body.poster.date + "T" + req.body.poster.start_time;
 		req.body.poster.ending = req.body.poster.date + "T" + req.body.poster.end_time;
-		req.body.poster.user_id = res.locals.currentUser.id;
-		req.body.poster.date = formatDate(req.body.poster.date);
+		req.body.poster.user_id = req.user.id;
+		req.body.poster.date = dateDisplay(req.body.poster.date);
 
 		knex("posters").insert(req.body.poster, "id").then(function(id){
 			res.redirect("/posters/" + id);
@@ -123,6 +193,7 @@ router.get('/:poster_id', function (req, res) {
 		Posters().where("id", req.params.poster_id).first().then(function(poster){
 			poster.start_time = standardTime(poster.start_time); // change military time to standard
 			poster.end_time = standardTime(poster.end_time);
+			poster.date = dateDisplay(poster.date); // change date to typical U.S. display format
 
 			if ( req.user && req.user.id === poster.user_id ) {   // Check if authorized
 				authorized = true;

@@ -10,8 +10,8 @@ Accent:
 
 #map {
 	border: 1px solid black;
-	height: 225px;
-	width: 450px;
+	height: 250px;
+	width: 100%;
 }
 
 .color-primary {
@@ -46,6 +46,21 @@ Accent:
 	color: #ff6e40;
 }
 
+.alert {
+	color: red;
+}
+
+.error {
+	position: absolute;
+	background-image: url("/images/poster-trash-404.png");
+	height: 100%;
+	width: 100%;
+}
+
+.border {
+	border: 1px solid black;
+}
+
 .subnav ul {
     list-style-type: none;
     margin: 0;
@@ -66,7 +81,7 @@ Accent:
 
 /* Change the link color to #111 (black) on hover */
 .subnav li a:hover {
-    background-color: #37474f;
+    background-color: #455a64;
 }
 
 .bold {
@@ -77,21 +92,76 @@ Accent:
 	margin-left: 10px;
 }
 
+.bump-down {
+	margin-top: 20px;
+}
+
 .poster {
 	width: 400px;
 	height: auto;
 }
 
-/* Only if screen not small */
-@media screen and (min-width: 600px) {
+header img {
+	margin: 5px;
+	margin-left: 10px;
+	height: 50px;
+}
 
-	.grow {
-		transition: all .5s ease-in-out;
+/* Make Posters be in columns */
+
+.wrapper {
+	width: 90%;
+	margin: 50px auto;
+}
+
+.columns {
+	-webkit-column-count: 2;
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-count: 2;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+	column-count: 2;
+	column-gap: 15px;
+	column-fill: auto;
+}
+
+.pin {
+	display: inline-block;
+	/*background: #FEFEFE;*/
+	/*border: 2px solid #FAFAFA;*/
+	/*box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);*/
+	margin: 0 2px 15px;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	/*padding: 15px;
+	padding-bottom: 5px;*/
+	/*background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);*/
+	opacity: 1;
+
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
+}
+
+@media (min-width: 1100px) {
+	.columns {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
 	}
+}
 
-	.grow:hover {
-		transform: scale(1.5);
-		z-index: 100;
+@media (max-width: 380px) {
+	.hide-on-xs {
+		display: none;
 	}
+}
 
+@media (min-width: 379px) {
+	.show-on-xs {
+		display: none;
+	}
 }

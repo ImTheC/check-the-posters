@@ -5,6 +5,8 @@ $(function(){
 		selectYears: 1 // Creates a dropdown of 1 years to control year
 	});
 
+	$('select').material_select();
+
 	$('.modal-trigger').leanModal();
 
 	$('#deleteYes').on('click', function(){
