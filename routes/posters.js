@@ -111,7 +111,7 @@ router.route('/')
 
 			if ( futurePosters.length === 0 ) {  // if no posters add in examples
 				futureWeeksDemo = true;
-				for ( var l = 1; l < 7; l++ ) {
+				for ( var l = 1; l < 6; l++ ) {
 					futurePosters.push(posters[l]);
 				}
 			}
