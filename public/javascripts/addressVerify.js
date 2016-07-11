@@ -14,11 +14,10 @@ function geocodeAddress(geocoder, resultsMap) {
 	geocoder.geocode({'address': address}, function(results, status) {
 		if (status === google.maps.GeocoderStatus.OK) {
 			var components = results[0].address_components;
-
 			document.getElementById('address').value = components[0].short_name + " " + components[1].short_name;
-			document.getElementById('city').value = components[3].short_name;
-			document.getElementById('state').value = components[5].short_name;
-			document.getElementById('zip').value = components[7].short_name;
+			document.getElementById('city').value = components[2].short_name;
+			document.getElementById('state').value = components[4].short_name;
+			document.getElementById('zip').value = components[6].short_name;
 			Materialize.toast('Address found!', 4000, 'green');
 
 		} else {
