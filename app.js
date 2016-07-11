@@ -12,10 +12,8 @@ var flash = require('connect-flash');
 require('dotenv').load();
 
 var auth = require('./routes/auth');
-var routes = require('./routes/index');
 var users = require('./routes/users');
 var postersRoute = require('./routes/posters');
-// var index = require('./routes/index');
 
 var app = express();
 
