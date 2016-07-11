@@ -14,17 +14,13 @@ include ../partials/nav
 					label(for='date') Date:
 					input#date.validate.datepicker(type='date' name="poster[date]" required)
 			.row
-				.input-field.col.s6.validate
-					label(for='start_time') Starting At:
-				.input-field.col.s6.validate
-					label(for='start_time') Ending At:
-			.row
-				.input-field.col.s2
+				.input-field.col.m2.s4
 					select#start_hour.validate(name="start_hour" required)
 						option(value='', disabled='', selected='') Hour:
 						-for (var i = 1; i <= 12; i++)
 							option(value=i)= i
-				.input-field.col.s2
+					label(for='start_time') Starting At:
+				.input-field.col.m2.s4
 					select#start_minute.validate(name="start_minute" required)
 						option(value='', disabled='', selected='') Minute:
 						-for (var i = 0; i < 60; i = i + 5)
@@ -32,17 +28,18 @@ include ../partials/nav
 								option(value="0" + i)= "0" + i
 							else
 								option(value=i)= i
-				.input-field.col.s2
+				.input-field.col.m2.s4
 					select#start_AMPM.validate(name="start_AMPM" required)
 						option(value='', disabled='', selected='') AM\PM:
 						option(value="AM") AM
 						option(value="PM") PM
-				.input-field.col.s2
+				.input-field.col.m2.s4
 					select#end_hour.validate(name="end_hour" required)
 						option(value='', disabled='', selected='') Hour:
 						-for (var i = 1; i <= 12; i++)
 							option(value=i)= i
-				.input-field.col.s2
+					label(for='start_time') Ending At:
+				.input-field.col.m2.s4
 					select#end_minute.validate(name="end_minute" required)
 						option(value='', disabled='', selected='') Minute:
 						-for (var i = 0; i < 60; i = i + 5)
@@ -50,7 +47,7 @@ include ../partials/nav
 								option(value="0" + i)= "0" + i
 							else
 								option(value=i)= i
-				.input-field.col.s2
+				.input-field.col.m2.s4
 					select#end_AMPM.validate(name="end_AMPM" required)
 						option(value='', disabled='', selected='') AM\PM:
 						option(value="AM") AM
