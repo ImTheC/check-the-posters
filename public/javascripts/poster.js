@@ -1,4 +1,6 @@
 $(function(){
+
+// ### Initialize Material Elements on Page ###
 	$('.datepicker').pickadate({
 		format: 'mmmm dd, yyyy',
 		selectMonths: true, // Creates a dropdown to control month
@@ -9,6 +11,8 @@ $(function(){
 
 	$('.modal-trigger').leanModal();
 
+
+// ### DELETE POSTERS ###
 	$('#deleteYes').on('click', function(){
 		var poster_id = $(this).closest('.modal-footer').find('#poster_id').text();
 
@@ -20,5 +24,15 @@ $(function(){
 				document.location.pathname = "/posters";
 			}
 		}); // End of AJAX call
+	}); // End of on click
+
+
+// ### Preview Image URL
+	$('#imgurl').on("change", function(){
+		var url = $(this).val();
+		var posterImg = "<img id='posterImg' class='poster materialboxed responsive-img' src='" + url + "'>";
+		$("#posterImg").remove();
+		$("#posterImageGoesHere").append(posterImg);
 	});
+
 }); // End of jQuery

@@ -19,7 +19,7 @@ include ../partials/nav
 				.input-field.col.s6.validate
 					label(for='start_time') Ending At:
 			.row
-				.input-field.col.s1
+				.input-field.col.s2
 					select#start_hour.validate(name="start_hour" required)
 						option(value='', disabled='', selected='') Hour:
 						-for (var i = 1; i <= 12; i++)
@@ -37,7 +37,7 @@ include ../partials/nav
 						option(value='', disabled='', selected='') AM\PM:
 						option(value="AM") AM
 						option(value="PM") PM
-				.input-field.col.s1.offset-s1
+				.input-field.col.s2
 					select#end_hour.validate(name="end_hour" required)
 						option(value='', disabled='', selected='') Hour:
 						-for (var i = 1; i <= 12; i++)
@@ -57,18 +57,17 @@ include ../partials/nav
 						option(value="PM") PM
 			.row
 				.input-field.col.s12
-					input#address.validate(type='text' name="poster[address]" required)
+					input#full_address.validate(type='text' name="full_address" required)
 					label(for='address') Address:
 			.row
-				.input-field.col.s6
+				.input-field.col.s3.hide
+					input#address.validate(type='text' name="poster[address]" required)
+				.input-field.col.s3.hide
 					input#city.validate(type='text' name="poster[city]" required)
-					label(for='city') City:
-				.input-field.col.s3
+				.input-field.col.s3.hide
 					input#state.validate(type='text' name="poster[state]" required)
-					label(for='state') State:
-				.input-field.col.s3
+				.input-field.col.s3.hide
 					input#zip.validate(type='text' name="poster[zip]" required)
-					label(for='zip') Zip:
 			.row
 				.input-field.col.s12
 					input#details.validate(type='text' placeholder="You can add extra details here if needed." name="poster[details]")
@@ -91,5 +90,6 @@ include ../partials/nav
 .section
 
 include ../partials/materializeScript
-script(type="text/javascript" src="/javascripts/poster_initialize.js")
-script(type="text/javascript" src="/javascripts/preview.js")
+script(type="text/javascript" src="/javascripts/poster.js")
+script(type="text/javascript" src="/javascripts/addressVerify.js")
+script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo-q4oyHyb8PboBomFwwpcVfVXDlW1Rn0&v=3&callback=initMap")
