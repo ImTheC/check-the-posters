@@ -20,8 +20,8 @@ include ../partials/subnav
 								span.hide#id #{poster.id}
 								if poster.starting < today && poster.ending > today
 									span.indent.center.red-text.example HAPPENING NOW!
-							if thisWeeksDemo
-								span.indent.right.red-text.flow-text EXAMPLE POSTER
+						if thisWeeksDemo
+							span.indent.center.red-text.flow-text EXAMPLE!
 			.wrapper
 				a(href="#"): p.center.flow-text Back To Top
 		else
@@ -43,8 +43,8 @@ include ../partials/subnav
 									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Click to heart!'): span.card-title.red-text.flow-text &#10084;
 								span#hearts-total.flow-text= " " + poster.hearts
 								span.hide#id #{poster.id}
-							if nextWeeksDemo
-								span.indent.right.red-text.flow-text EXAMPLE POSTER!
+						if nextWeeksDemo
+							span.indent.center.red-text.flow-text EXAMPLE!
 			.wrapper
 				a(href="#"): p.center.flow-text Back To Top
 		else
@@ -66,8 +66,8 @@ include ../partials/subnav
 									a.tooltipped(href="#" data-position='bottom', data-delay='50', data-tooltip='Click to heart!'): span.card-title.red-text.flow-text &#10084;
 								span#hearts-total.flow-text= " " + poster.hearts
 								span.hide#id #{poster.id}
-							if futureWeeksDemo
-								span.indent.right.red-text.flow-text EXAMPLE POSTER!
+						if futureWeeksDemo
+							span.indent.center.red-text.flow-text EXAMPLE!
 			.wrapper
 				a(href="#"): p.center.flow-text Back To Top
 		else
