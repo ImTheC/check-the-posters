@@ -97,7 +97,7 @@ router.route('/')
 
 			if ( thisWeeksPosters.length === 0 ) {  // if no posters add in examples
 				thisWeeksDemo = true;
-				for ( var j = 0; j < 4; j++ ) {
+				for ( var j = 1; j < 4; j++ ) {
 					thisWeeksPosters.push(posters[j]);
 				}
 			}
