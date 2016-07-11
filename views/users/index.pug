@@ -3,28 +3,30 @@ include ../partials/nav.pug
 
 block content
   div.container
-    h1 #{title}
-    h2 Hello admin!
-    table(class="striped")
-      thead
-        th ID
-        th Name
-        th Username
-        th Edit User
-        th Delete User
-      tbody
-        each user in users
-          tr
-            td #{user.id}
-            td #{user.name}
-            td #{user.username}
-            td
-              a(href="/users/" + user.id + "/edit") Edit
-            td
-              form(action="/users/" + user.id + "?_method=DELETE" method="POST")
-                button.waves-effect.waves-light.btn.red(type="submit")
-                  i.material-icons delete
-      tfoot
+		.row
+			.col.s12
+		    h1 #{title}
+		    h2 Hello admin!
+		    table(class="striped")
+		      thead
+		        th ID
+		        th Name
+		        th Username
+		        th Edit User
+		        th Delete User
+		      tbody
+		        each user in users
+		          tr
+		            td #{user.id}
+		            td #{user.name}
+		            td #{user.username}
+		            td
+		              a(href="/users/" + user.id + "/edit") Edit
+		            td
+		              form(action="/users/" + user.id + "?_method=DELETE" method="POST")
+		                button.waves-effect.waves-light.btn.red(type="submit")
+		                  i.material-icons delete
+		      tfoot
 
 
 include ../partials/materializeScript.pug

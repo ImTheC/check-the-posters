@@ -25,7 +25,7 @@ function geocodeAddress(geocoder, resultsMap, address) {
 			resultsMap.setZoom(15);
 
 		} else {
-			alert('Geocode was not successful for the following reason: ' + status);
+			console.log("Unable to load map location! Error: " + status);
 		}
 	});
 }

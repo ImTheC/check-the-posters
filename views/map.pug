@@ -5,18 +5,25 @@ h1 #{title}
 
 .container
 	.row
-		.col.s12
-			#floating-panel
-				#floating-panel
-					input#address(type='textbox', value='118 Nueces St, , Austin, TX, 78701')
-					input#submit(type='button', value='Geocode')
-					#firstComponent
-					#secondComponent
+		.input-field.col.s6
+			input#full_address(type='text', value='118 Nueces St, , Austin, TX, 78701')
+		.input-field.col.s6
+			input#submit(type='button', value='Geocode')
 	.row
-		.col.s12
+		.col.s6
 				#map
-script(type="text/javascript" src="/javascripts/maps.js")
-script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo-q4oyHyb8PboBomFwwpcVfVXDlW1Rn0&v=3&callback=initMap")
+	.row
+		.input-field.col.s12
+			input#street(type='text', value='street')
+	.row
+		.input-field.col.s6
+			input#city(type='text', value='city')
+		.input-field.col.s3
+			input#state(type='text', value='state')
+		.input-field.col.s3
+			input#zip(type='text', value='zip')
 
 
 include partials/materializeScript
+script(type="text/javascript" src="../javascripts/addressVerify.js")
+script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo-q4oyHyb8PboBomFwwpcVfVXDlW1Rn0&v=3&callback=initMap")
