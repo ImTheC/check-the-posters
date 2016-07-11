@@ -97,21 +97,21 @@ router.route('/')
 
 			if ( thisWeeksPosters.length === 0 ) {  // if no posters add in examples
 				thisWeeksDemo = true;
-				for ( var j = 1; j < 3; j++ ) {
+				for ( var j = 1; j < 4; j++ ) {
 					thisWeeksPosters.push(posters[j]);
 				}
 			}
 
 			if ( nextWeeksPosters.length === 0 ) {  // if no posters add in examples
 				nextWeeksDemo = true;
-				for ( var k = 3; k < 5; k++ ) {
+				for ( var k = 1; k < 4; k++ ) {
 					thisWeeksPosters.push(posters[k]);
 				}
 			}
 
 			if ( futurePosters.length === 0 ) {  // if no posters add in examples
 				futureWeeksDemo = true;
-				for ( var l = 5; l < 7; l++ ) {
+				for ( var l = 1; l < 4; l++ ) {
 					futurePosters.push(posters[l]);
 				}
 			}
